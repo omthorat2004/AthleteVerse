@@ -41,7 +41,7 @@ class _FeaturesScreenState extends State<FeaturesScreen>
               padding: const EdgeInsets.only(top: 20),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
-                crossAxisSpacing: 4,
+                crossAxisSpacing: 2,
                 childAspectRatio: 6,
               ),
               children: [
@@ -54,6 +54,7 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                     Navigator.pushNamed(context, '/performance_tracking');
                   },
                 ),
+
                 _buildFeatureButton(
                   context,
                   label: 'Injury Management',
@@ -76,24 +77,27 @@ class _FeaturesScreenState extends State<FeaturesScreen>
       required IconData icon,
       required Color color,
       required VoidCallback onTap}) {
-    return ElevatedButton.icon(
-      onPressed: onTap,
-      icon: Icon(icon, size: 23, color: Colors.white),
-      label: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: ElevatedButton.icon(
+        onPressed: onTap,
+        icon: Icon(icon, size: 23, color: Colors.white),
+        label: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        backgroundColor: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 0,
         ),
-        elevation: 0,
       ),
     );
   }
