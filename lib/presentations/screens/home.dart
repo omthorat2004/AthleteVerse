@@ -45,7 +45,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
-  final List<Widget> _pages = [HomeContent(), FeaturesScreen(), ProfileContent()];
+  final List<Widget> _pages = [
+    HomeContent(),
+    FeaturesScreen(),
+    ProfileContent(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +119,10 @@ class _HomeContentState extends State<HomeContent> {
               ),
               filled: true,
               fillColor: Colors.grey[200],
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -141,20 +147,42 @@ class _HomeContentState extends State<HomeContent> {
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/14s2iu3z58uq/career-path.png',
               ),
               _buildGridItem(
-                title: 'Nutrition',
-                description: 'Optimal Diet Plans',
+                title: 'Organizations',
+                description: 'Connect with sports bodies',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/ckfcuipvqru9/partners.png',
               ),
               _buildGridItem(
-                title: 'Health & Fitness',
-                description: 'Maintain peak physical condition',
+                title: 'Finances',
+                description: 'Manage your resources',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/5z2y7rn2b554/budget.png',
               ),
             ],
           ),
           const SizedBox(height: 20),
+          ElevatedButton.icon(
+            onPressed: () {},
+            icon: Icon(Icons.warning, size: 20, color: Colors.white),
+            label: Text(
+              'Anonymous Reporting',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+         
+              padding: const EdgeInsets.symmetric(
+                vertical: 15.0,
+                horizontal: 16.0,
+              ),
+              
+            ),
+          ),
+          const SizedBox(height: 10),
           Text(
             'Top Organizations',
             style: GoogleFonts.openSans(
@@ -188,158 +216,170 @@ class _HomeContentState extends State<HomeContent> {
         ],
       ),
     );
-  }Widget _buildGridItem({
-  required String title,
-  required String description,
-  required String imageUrl,
-}) {
-  bool isHovered = false;
+  }
 
-  return StatefulBuilder(builder: (context, setState) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => isHovered = true),
-      onExit: (_) => setState(() => isHovered = false),
-      child: Container(
-
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF2979FF), Color(0xFF0091EA)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(18),
-          boxShadow: [
-            BoxShadow(
-              // ignore: deprecated_member_use
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(8), // Adjust padding if needed
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Centers content vertically
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(2),
-              child: Image.network(
-                imageUrl,
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 8), // Space between image and text
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.openSans(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            AnimatedOpacity(
-              opacity: isHovered ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 200),
-              child: Text(
-                description,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  color: Colors.white70,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  });
-}
-
-
-
-  Widget _buildOrganizationItem(String name, String logoUrl) {
+  Widget _buildGridItem({
+    required String title,
+    required String description,
+    required String imageUrl,
+  }) {
     bool isHovered = false;
-    return StatefulBuilder(builder: (context, setState) {
-      return MouseRegion(
-        onEnter: (_) => setState(() => isHovered = true),
-        onExit: (_) => setState(() => isHovered = false),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
 
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return MouseRegion(
+          onEnter: (_) => setState(() => isHovered = true),
+          onExit: (_) => setState(() => isHovered = false),
+          child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF2979FF), Color(0xFF0091EA)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(18),
               boxShadow: [
                 BoxShadow(
                   // ignore: deprecated_member_use
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
+            padding: const EdgeInsets.all(8), // Adjust padding if needed
             child: Column(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centers content vertically
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(10)),
+                  borderRadius: BorderRadius.circular(2),
                   child: Image.network(
-                    logoUrl,
-                    width: 180,
-                    height: 130,
+                    imageUrl,
+                    width: 80,
+                    height: 80,
                     fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
+                    loadingBuilder: (
+                      BuildContext context,
+                      Widget child,
+                      ImageChunkEvent? loadingProgress,
+                    ) {
                       if (loadingProgress == null) return child;
                       return Center(
                         child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
+                          value:
+                              loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
                         ),
                       );
                     },
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 8), // Space between image and text
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.openSans(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 AnimatedOpacity(
-                  opacity: isHovered ? 1.0 : 0.5,
+                  opacity: isHovered ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 200),
                   child: Text(
-                    name,
+                    description,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.openSans(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF333333),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
+  }
+
+  Widget _buildOrganizationItem(String name, String logoUrl) {
+    bool isHovered = false;
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return MouseRegion(
+          onEnter: (_) => setState(() => isHovered = true),
+          onExit: (_) => setState(() => isHovered = false),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    // ignore: deprecated_member_use
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      logoUrl,
+                      width: 180,
+                      height: 130,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (
+                        BuildContext context,
+                        Widget child,
+                        ImageChunkEvent? loadingProgress,
+                      ) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value:
+                                loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  AnimatedOpacity(
+                    opacity: isHovered ? 1.0 : 0.5,
+                    duration: const Duration(milliseconds: 200),
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.openSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF333333),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
