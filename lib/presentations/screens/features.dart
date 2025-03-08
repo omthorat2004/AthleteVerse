@@ -54,7 +54,6 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                     Navigator.pushNamed(context, '/performance_tracking');
                   },
                 ),
-
                 _buildFeatureButton(
                   context,
                   label: 'Injury Management',
@@ -62,6 +61,24 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                   color: Colors.red,
                   onTap: () {
                     Navigator.pushNamed(context, '/injury_management');
+                  },
+                ),
+                _buildFeatureButton(
+                  context,
+                  label: 'Game Zone',
+                  icon: Icons.gamepad,
+                  color: Colors.deepPurple,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/game');
+                  },
+                ),
+                _buildFeatureButton(
+                  context,
+                  label: 'Finance Section', // New Finance Button
+                  icon: Icons.account_balance_wallet, // Suitable Icon
+                  color: Colors.teal.shade700, // Finance-Themed Color
+                  onTap: () {
+                    Navigator.pushNamed(context, '/finance');
                   },
                 ),
               ],
@@ -72,11 +89,13 @@ class _FeaturesScreenState extends State<FeaturesScreen>
     );
   }
 
-  Widget _buildFeatureButton(BuildContext context,
-      {required String label,
-      required IconData icon,
-      required Color color,
-      required VoidCallback onTap}) {
+  Widget _buildFeatureButton(
+    BuildContext context, {
+    required String label,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: ElevatedButton.icon(

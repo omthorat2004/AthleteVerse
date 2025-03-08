@@ -162,7 +162,9 @@ class _HomeContentState extends State<HomeContent> {
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context,'/anonymousreporting');
+            },
             icon: Icon(Icons.warning, size: 20, color: Colors.white),
             label: Text(
               'Anonymous Reporting',
@@ -174,12 +176,11 @@ class _HomeContentState extends State<HomeContent> {
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
-         
+
               padding: const EdgeInsets.symmetric(
                 vertical: 15.0,
                 horizontal: 16.0,
               ),
-              
             ),
           ),
           const SizedBox(height: 10),
