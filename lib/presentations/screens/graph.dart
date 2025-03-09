@@ -10,8 +10,8 @@ class AthleteProgressScreen extends StatefulWidget {
 }
 
 class _AthleteProgressScreenState extends State<AthleteProgressScreen> {
-  String selectedGraphType = "Daily"; // Default graph type
-  String selectedExercise = "Squats"; // Default exercise
+  String selectedGraphType = "Daily";
+  String selectedExercise = "Squats"; 
 
   final List<String> graphTypes = ["Daily", "Weekly", "Monthly", "Yearly"];
   final List<String> exerciseTypes = ["Squats", "Bench Press", "Deadlifts", "Pull-ups"];
@@ -98,12 +98,12 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> {
                       barRods: [
                         BarChartRodData(
                           toY: values[index].toDouble(),
-                          color: Colors.blue, // Athlete's progress
+                          color: Colors.blue, 
                           width: 12,
                         ),
                         BarChartRodData(
                           toY: idealValues[index].toDouble(),
-                          color: Colors.green, // Ideal value
+                          color: Colors.green, 
                           width: 12,
                         ),
                       ],

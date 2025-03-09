@@ -20,7 +20,7 @@ class AthleteManagementApp extends StatelessWidget {
     return MaterialApp(
       title: 'Athlete Management',
       theme: ThemeData(primarySwatch: Colors.blue),
-      // Define the initial route and the named routes for navigation
+    
       initialRoute: '/',
       routes: {
         '/': (context) => LandingPage(),
