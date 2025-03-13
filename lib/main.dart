@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/presentations/screens/anonymousreporting.dart';
+import 'package:myapp/presentations/screens/rentpage.dart';
 import 'presentations/screens/finance.dart' show FinanceScreen;
 import 'presentations/screens/home.dart';
 import 'presentations/screens/features.dart';
@@ -7,6 +8,7 @@ import 'presentations/screens/performancetracking.dart';
 import 'presentations/screens/checklist.dart';
 import 'presentations/screens/graph.dart';
 import 'presentations/screens/game.dart';
+import 'presentations/screens/financedashboard.dart';
 
 void main() {
   runApp(AthleteManagementApp());
@@ -20,7 +22,7 @@ class AthleteManagementApp extends StatelessWidget {
     return MaterialApp(
       title: 'Athlete Management',
       theme: ThemeData(primarySwatch: Colors.blue),
-    
+
       initialRoute: '/',
       routes: {
         '/': (context) => LandingPage(),
@@ -29,9 +31,11 @@ class AthleteManagementApp extends StatelessWidget {
         '/performance_tracking': (context) => PerformanceScreen(),
         '/checklist': (context) => ChecklistScreen(),
         '/graph': (context) => AthleteProgressScreen(),
-        '/game':(context)=>GameScreen(),
-        '/finance':(context)=>FinanceScreen(),
-        '/anonymousreporting':(context)=>AnonymousReportScreen()
+        '/game': (context) => GameScreen(),
+        '/finance': (context) => FinanceScreen(),
+        '/anonymousreporting': (context) => AnonymousReportScreen(),
+        '/finance/rentpage': (context) => SportsKitPage(),
+        '/finance/dashboard': (context) => Financedashboard(),
       },
     );
   }
