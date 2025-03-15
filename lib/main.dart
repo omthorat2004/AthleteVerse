@@ -35,7 +35,7 @@ class AthleteManagementApp extends StatelessWidget {
         '/finance': (context) => FinanceScreen(),
         '/anonymousreporting': (context) => AnonymousReportScreen(),
         '/finance/rentpage': (context) => SportsKitPage(),
-        '/finance/dashboard': (context) => Financedashboard(),
+        '/finance/dashboard': (context) => FinanceDashboard(),
       },
     );
   }

@@ -16,69 +16,87 @@ class _IncomeEarningsOverviewState extends State<IncomeEarningsOverview> {
     {"source": "Salary", "amount": 60000, "date": "2025-01-30"},
   ];
 
+  final List<Map<String, dynamic>> upcomingPayments = [
+    {"source": "Training Fee", "amount": 15000, "date": "2025-03-10"},
+    {"source": "Equipment Purchase", "amount": 20000, "date": "2025-03-15"},
+  ];
+
   double getTotalEarnings() {
     return earnings.fold(0, (sum, item) => sum + item['amount']);
+  }
+
+  double getSponsorshipRevenue() {
+    return earnings.where((e) => e['source'] == "Sponsorship").fold(0, (sum, item) => sum + item['amount']);
+  }
+
+  double getSponsorshipExpenses() {
+    return 25000; // Example value
+  }
+
+  double getNetBalance() {
+    return getTotalEarnings() - getSponsorshipExpenses();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Income & Earnings Overview"),
-        backgroundColor: Colors.blueAccent,
-      ),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Total Earnings",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      currencyFormat.format(getTotalEarnings()),
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            buildFinanceCard("Total Income", getTotalEarnings()),
+            buildFinanceCard("Sponsorship Revenue", getSponsorshipRevenue()),
+            buildFinanceCard("Sponsorship Expenses", getSponsorshipExpenses()),
+            buildFinanceCard("Net Balance", getNetBalance()),
             SizedBox(height: 20),
-            Text(
-              "Earnings Breakdown",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+            Text("Upcoming Payments", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: earnings.length,
+                itemCount: upcomingPayments.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    margin: EdgeInsets.symmetric(vertical: 8),
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 4,
                     child: ListTile(
-                      leading: Icon(Icons.monetization_on, color: Colors.green),
-                      title: Text(earnings[index]['source'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                      subtitle: Text("Received on: ${earnings[index]['date']}", style: TextStyle(color: Colors.grey)),
+                      leading: Icon(Icons.warning_amber_rounded, color: Colors.blueAccent),
+                      title: Text(upcomingPayments[index]['source'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                      subtitle: Text("Due on: ${upcomingPayments[index]['date']}", style: TextStyle(color: Colors.black54)),
                       trailing: Text(
-                        currencyFormat.format(earnings[index]['amount']),
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                        currencyFormat.format(upcomingPayments[index]['amount']),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                     ),
                   );
                 },
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildFinanceCard(String title, double amount) {
+    return Card(
+      color: Colors.white,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+            SizedBox(height: 10),
+            Text(
+              currencyFormat.format(amount),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blueAccent),
             ),
           ],
         ),
