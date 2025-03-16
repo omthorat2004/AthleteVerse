@@ -66,7 +66,7 @@ class _FinanceScreenState extends State<FinanceScreen>
                   label: 'Trip Cost Estimation',
                   icon: Icons.calculate,
                   onTap: () {
-                    Navigator.pushNamed(context, '/trip_cost');
+                    Navigator.pushNamed(context, '/finance/travelcost');
                   },
                 ),
                 _buildFeatureButton(
@@ -74,7 +74,7 @@ class _FinanceScreenState extends State<FinanceScreen>
                   label: 'Government Scheme',
                   icon: Icons.account_balance,
                   onTap: () {
-                    Navigator.pushNamed(context, '/govt_scheme');
+                    Navigator.pushNamed(context, '/finance/scheme');
                   },
                 ),
                 _buildFeatureButton(

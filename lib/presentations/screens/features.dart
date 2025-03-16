@@ -74,9 +74,9 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                 ),
                 _buildFeatureButton(
                   context,
-                  label: 'Finance Section', // New Finance Button
-                  icon: Icons.account_balance_wallet, // Suitable Icon
-                  color: Colors.teal.shade700, // Finance-Themed Color
+                  label: 'Finance Section', 
+                  icon: Icons.account_balance_wallet, 
+                  color: Colors.teal.shade700, 
                   onTap: () {
                     Navigator.pushNamed(context, '/finance');
                   },
