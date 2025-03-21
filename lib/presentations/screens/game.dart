@@ -128,7 +128,7 @@ class _GameScreenState extends State<GameScreen> {
               children: [
                 CharacterWidget(
                   characterName: "Priya",
-                  animationFile: "assets/priya.riv",
+                  animationFile: "priya.riv",
                   controller: _priyaController,
                   isSpeaking: isPriyaSpeaking,
                   dialogue: currentDialogue,
@@ -136,7 +136,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
                 CharacterWidget(
                   characterName: "Vikram",
-                  animationFile: "assets/vikram.riv",
+                  animationFile: "vikram.riv",
                   controller: _vikramController,
                   isSpeaking: !isPriyaSpeaking,
                   dialogue: currentDialogue,

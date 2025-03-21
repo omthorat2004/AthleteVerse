@@ -26,8 +26,8 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
     'Harassment',
     'Unfair Selection',
     'Medical Negligence',
-    'Mental Health Issue',
     'Corruption',
+
     'Other'
   ];
 
@@ -61,7 +61,7 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Text(
-                    "Courage Wins, Silence Ends!\nReport. Rise. Reclaim.\nSilence Ends, Change Begins!",
+                    "Report. Rise. Reclaim.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,

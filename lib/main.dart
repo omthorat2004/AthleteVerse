@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/presentations/screens/anonymousreporting.dart';
+import 'package:myapp/presentations/screens/splash.dart';
 import 'package:myapp/presentations/screens/comentarygame.dart';
 import 'package:myapp/presentations/screens/financescheme.dart';
 import 'package:myapp/presentations/screens/gamezone.dart';
@@ -9,12 +11,19 @@ import 'presentations/screens/finance.dart' show FinanceScreen;
 import 'presentations/screens/home.dart';
 import 'presentations/screens/features.dart';
 import 'presentations/screens/performancetracking.dart';
-import 'presentations/screens/checklist.dart';
+import 'presentations/screens/checklist.dart'; 
 import 'presentations/screens/graph.dart';
 import 'presentations/screens/game.dart';
 import 'presentations/screens/financedashboard.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(AthleteManagementApp());
 }
 
@@ -25,10 +34,9 @@ class AthleteManagementApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Athlete Management',
-      theme: ThemeData(primarySwatch: Colors.blue),
-
       initialRoute: '/',
       routes: {
+        '/splash': (context) => SplashScreen(),
         '/': (context) => LandingPage(),
         '/home': (context) => HomePage(),
         '/features': (context) => FeaturesScreen(),
@@ -46,6 +54,7 @@ class AthleteManagementApp extends StatelessWidget {
         '/finance/scheme':(context)=>AthleteSchemesPage(),
       },
     );
+
   }
 }
 
@@ -62,36 +71,46 @@ class _LandingPageState extends State<LandingPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String? _selectedUserType;
+  String _verificationId = '';
 
   void _login() {
-    if (_formKey.currentState!.validate()) {
-      print("Email: ${_emailController.text}");
-      print("Password: ${_passwordController.text}");
-      print("User Type: $_selectedUserType");
-
-      if (_selectedUserType == "Athlete") {
-        Navigator.pushNamed(context, '/home');
+   if (_formKey.currentState!.validate()) {
+     FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    ).then((userCredential) {
+        if (_selectedUserType == "Athlete") {
+        Navigator.pushReplacementNamed(context, '/splash');
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Currently, this user type is not supported'),
             backgroundColor: Colors.red,
           ),
         );
       }
+    }).catchError((error) {
+       ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Incorrect Password or Email'),
+            backgroundColor: Colors.red,
+          ),
+        );
+    });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login to AthleteVerse', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue.shade700,
+        backgroundColor: Colors.blueAccent,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Center(
+      body:Container(
+        color: Colors.white,
+        child:  Padding(
+        padding: EdgeInsets.all(20.0),
+          child: Center(
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
@@ -154,18 +173,22 @@ class _LandingPageState extends State<LandingPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      filled: true,
+                      fillColor: Colors.white
                     ),
                     value: _selectedUserType,
-                    items: ['Athlete', 'Coach', 'Organization']
+                    items: ['Athlete', 'Coach', 'Organization','Sponsors','Admin']
                         .map((type) => DropdownMenuItem(
                               value: type,
                               child: Text(type),
+
                             ))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
                         _selectedUserType = value;
                       });
+                    
                     },
                     validator: (value) => value == null ? 'Please select a user type' : null,
                   ),
@@ -190,6 +213,7 @@ class _LandingPageState extends State<LandingPage> {
           ),
         ),
       ),
+      )
     );
   }
 }
