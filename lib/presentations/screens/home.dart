@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TextEditingController _textController;
   late FocusNode _textFieldFocusNode;
+  bool _showSpendingAlert = true;
   bool isHovered = false;
   int _selectedIndex = 0;
 
@@ -23,6 +24,39 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
     _textController = TextEditingController();
     _textFieldFocusNode = FocusNode();
+     Future.delayed(const Duration(seconds: 3), () {
+      if (_showSpendingAlert) {
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Spending Alert'),
+              content: const Text(
+                  'You are currently spending excessively on dining. Consider setting a budget to manage your finances more effectively.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Set Budget'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                       _showSpendingAlert= false;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Dismiss'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -109,6 +143,7 @@ class _HomeContentState extends State<HomeContent> {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Search...',
@@ -126,6 +161,32 @@ class _HomeContentState extends State<HomeContent> {
             ),
           ),
           const SizedBox(height: 20),
+          Tooltip(
+            message: "Report any issue anonymously",
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context,'/anonymousreporting');
+              },
+              icon: Icon(Icons.privacy_tip, size: 24, color: Colors.white),
+              label: Text(
+                'Anonymous Reporting',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                fixedSize: Size.fromHeight(50),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15.0,
+                  horizontal: 16.0,
+                ),
+              ),
+            ),
+          ),          
+          const SizedBox(height: 10),
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -161,29 +222,7 @@ class _HomeContentState extends State<HomeContent> {
             ],
           ),
           const SizedBox(height: 20),
-          ElevatedButton.icon(
-            onPressed: () {
-              Navigator.pushNamed(context,'/anonymousreporting');
-            },
-            icon: Icon(Icons.warning, size: 20, color: Colors.white),
-            label: Text(
-              'Anonymous Reporting',
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-
-              padding: const EdgeInsets.symmetric(
-                vertical: 15.0,
-                horizontal: 16.0,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
+          
           Text(
             'Top Organizations',
             style: GoogleFonts.openSans(

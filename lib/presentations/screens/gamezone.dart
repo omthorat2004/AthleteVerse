@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/presentations/screens/game.dart';
 
 class GameZonePage extends StatelessWidget {
   const GameZonePage({super.key});
@@ -7,7 +8,7 @@ class GameZonePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Game Zone', style: TextStyle(color: Colors.white)),
+        title: Text('Arcade', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue.shade700,
       ),
       body: Padding(
@@ -39,7 +40,7 @@ class GameZonePage extends StatelessWidget {
                     Icons.rule,
                     'Decision-Based Game',
                     'Make strategic decisions and test your skills.',
-                    '/game/decesion',
+                    '/game/decesion', 
                   ),
                   _buildGameCard(
                     context,
@@ -62,12 +63,19 @@ class GameZonePage extends StatelessWidget {
     IconData icon,
     String title,
     String description,
-    String route,
+    dynamic route, // Changed this line
   ) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, route);
-      },
+         if (route is String) {
+          Navigator.pushNamed(context, route);
+        } else if (route is Widget) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => route),
+          );
+        }
+       },
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

@@ -77,14 +77,7 @@ class _FinanceScreenState extends State<FinanceScreen>
                     Navigator.pushNamed(context, '/finance/scheme');
                   },
                 ),
-                _buildFeatureButton(
-                  context,
-                  label: 'Alerts for Overspending',
-                  icon: Icons.warning,
-                  onTap: () {
-                    Navigator.pushNamed(context, '/overspending_alerts');
-                  },
-                ),
+               
               ],
             ),
           ),
