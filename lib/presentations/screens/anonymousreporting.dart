@@ -12,7 +12,6 @@ class AnonymousReportScreen extends StatefulWidget {
 }
 
 class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _issueDescriptionController = TextEditingController();
   String? _selectedCategory;
@@ -43,10 +42,8 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
         title: const Text(
           'Anonymous Reporting',
           style: TextStyle(color: Colors.white),
-        ),
-        elevation: 4,
-
-      ),
+        
+      )),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -59,37 +56,37 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
                 children: [
                   const SizedBox(height: 20),
                   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.blue[700],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Text(
-                          "Report. Rise. Reclaim.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[700],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text(
+                        "Report. Rise. Reclaim.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
+                  ),
                   const SizedBox(height: 20),
                   _buildDropdownField("Issue Category", "Select an issue category",
                       _selectedCategory, _issueCategories, (value) {
                     setState(() {
                       _selectedCategory = value;
                     });
-                  },),
+                  }),
                   const SizedBox(height: 15),
-                    _buildDropdownField("Type of Resolution Needed", "Select type of resolution needed", _selectedResolutionType, ['Awareness (Just informing)', 'Investigation (Need action)', 'Immediate intervention (Urgent action required)'], (value) {
+                  _buildDropdownField("Type of Resolution Needed", "Select type of resolution needed", _selectedResolutionType, ['Awareness (Just informing)', 'Investigation (Need action)', 'Immediate intervention (Urgent action required)'], (value) {
                     setState(() {_selectedResolutionType = value;});
-                  },),
-                    const SizedBox(height: 15),
+                  }),
+                  const SizedBox(height: 15),
                   _buildDropdownField(
                       "Frequency of the Issue", "Select frequency of the issue",_selectedFrequency,
                       _issueFrequencies, (value) {
@@ -117,7 +114,6 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
                   _submitButton(),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 ],
-
               ),
             ),
           ),
@@ -138,10 +134,8 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
         Text(label,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
         const SizedBox(height: 6),
-
         DropdownButtonFormField<String>(
           isExpanded: true,
-
           value: value,
           hint: Text(hint),
           items: items.map((String item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
@@ -200,7 +194,6 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
             ),
             child: Row(
               children: [
-               
                 const SizedBox(
                   width: 30,
                   height: 30,
@@ -212,7 +205,7 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
                   child: Text(
                     _selectedLocation == null
                         ? "Select location on map"
-                        : "Lat: ${_selectedLocation!.latitude}, Lng: ${_selectedLocation!.longitude}",
+                        : "Lat: ${_selectedLocation!.latitude.toStringAsFixed(4)}, Lng: ${_selectedLocation!.longitude.toStringAsFixed(4)}",
                     style: const TextStyle(fontSize: 16), 
                   ),
                 ), 
@@ -249,12 +242,12 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]),
             ),
             const SizedBox(width: 10),
-             OutlinedButton.icon(
+            OutlinedButton.icon(
               onPressed: () => _pickFile(fromDevice: false),
               icon: Image.asset("drive.png", width: 24, height: 24),
               label: const Text("Drive", style: TextStyle(color: Colors.blue)),
               style: OutlinedButton.styleFrom(
-                 side: const BorderSide(color: Colors.blue, width: 1.5),
+                side: const BorderSide(color: Colors.blue, width: 1.5),
               ),
             ),
           ],
@@ -301,7 +294,9 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 5,
           ),
-          child: _isSubmitting ? const CircularProgressIndicator(color: Colors.white) : const Text('Submit Report',style: TextStyle(
+          child: _isSubmitting 
+              ? const CircularProgressIndicator(color: Colors.white) 
+              : const Text('Submit Report', style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -322,11 +317,9 @@ class _AnonymousReportScreenState extends State<AnonymousReportScreen> {
 }
 
 class GoogleAuthClient extends http.BaseClient {
-
   final Map<String, String> _headers;
   final http.Client _client = http.Client();
   GoogleAuthClient(this._headers);
-
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
@@ -345,26 +338,31 @@ class LocationPickerScreen extends StatefulWidget {
   @override
   State<LocationPickerScreen> createState() => _LocationPickerScreenState();
 }
+
 class _LocationPickerScreenState extends State<LocationPickerScreen> {
   GoogleMapController? mapController;
-  LatLng _currentLocation = const LatLng(37.42796133580664, -122.085749655962);
+  LatLng _currentLocation = const LatLng(28.6139, 77.2090);
   Set<Marker> markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    markers.add(
+      Marker(
+        markerId: const MarkerId("selected_location"),
+        position: _currentLocation,
+      ),
+    );
+  }
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
-   
-      markers.add(
-        Marker(
-          markerId: const MarkerId("selected_location"),
-          position: _currentLocation,
-        ),
-      );
   }
 
   void _onMapTap(LatLng location) {
     setState(() {
       _currentLocation = location;
-      markers.clear(); 
+      markers.clear();
       markers.add(
         Marker(
           markerId: const MarkerId("selected_location"),
@@ -387,6 +385,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           zoom: 11.0,
         ),
         markers: markers,
+        onTap: _onMapTap,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context, _currentLocation),

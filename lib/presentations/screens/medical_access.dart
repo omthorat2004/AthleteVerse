@@ -98,7 +98,7 @@ class _MedicalRecordsAccessScreenState extends State<MedicalRecordsAccessScreen>
             const SizedBox(height: 12),
             _buildReportCard(
               "MRI Report - Right Knee",
-              "Dr. James Wilson",
+              "Dr. Hansraj Hathi",
               "Sports Medicine Center",
               "Imaging",
               "Feb 15, 2025",
@@ -106,7 +106,7 @@ class _MedicalRecordsAccessScreenState extends State<MedicalRecordsAccessScreen>
             ),
             _buildReportCard(
               "Blood Test Results",
-              "Dr. Emily Chen",
+              "Dr. Naresh Trehan",
               "Health Diagnostics Lab",
               "Lab",
               "Jan 28, 2025",

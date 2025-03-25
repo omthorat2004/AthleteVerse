@@ -65,6 +65,15 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                       Navigator.pushNamed(context, '/calorie');
                     },
                   ),
+                   _buildFeatureButton(
+                    context,
+                    label: 'Wearable Data',
+                    icon: Icons.calculate,
+                    onTap: () {
+                      // Navigate to Calorie Calculator screen
+                      Navigator.pushNamed(context, '/wearable_data');
+                    },
+                  ),
                 ],
               ),
             ),

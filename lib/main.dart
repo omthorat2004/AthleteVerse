@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/presentations/screens/anonymousreporting.dart';
 import 'package:myapp/presentations/screens/caloriecount.dart';
 import 'package:myapp/presentations/screens/medical_access.dart';
+import 'package:myapp/presentations/screens/organizations/organizationhome.dart';
+import 'package:myapp/presentations/screens/organizations/scouringdashboard.dart';
 import 'package:myapp/presentations/screens/rehab_exercises.dart';
 import 'package:myapp/presentations/screens/rehab_progress.dart';
 import 'package:myapp/presentations/screens/splash.dart';
@@ -11,6 +13,7 @@ import 'package:myapp/presentations/screens/financescheme.dart';
 import 'package:myapp/presentations/screens/gamezone.dart';
 import 'package:myapp/presentations/screens/rentpage.dart';
 import 'package:myapp/presentations/screens/travelcostpage.dart';
+import 'package:myapp/presentations/screens/wearable_data.dart';
 import 'presentations/screens/finance.dart' show FinanceScreen;
 import 'presentations/screens/home.dart';
 import 'presentations/screens/features.dart';
@@ -47,6 +50,7 @@ class AthleteManagementApp extends StatelessWidget {
         '/performance_tracking': (context) => PerformanceScreen(),
         '/checklist': (context) => ChecklistScreen(),
         '/calorie': (context) => CalorieTrackerScreen(),
+        '/wearable_data': (context) => WearableDataPage(),
         '/graph': (context) => AthleteProgressScreen(),
         '/game': (context) => GameZonePage(),
         '/game/decesion': (context) => ModuleSelectionScreen(),
@@ -56,10 +60,12 @@ class AthleteManagementApp extends StatelessWidget {
         '/finance/dashboard': (context) => FinanceDashboard(),
         '/finance/travelcost': (context) => TravelCostPage(),
         '/finance/scheme': (context) => AthleteSchemesPage(),
-        '/injury':(context)=>InjuryScreen(),
-        '/injury/rehab_exercises':(context)=>RehabExercisesScreen(),
-        '/injury/medical_records':(context)=>MedicalRecordsAccessScreen(),
-        '/injury/recovery_progress':(context)=>RehabProgressPage()
+        '/injury': (context) => InjuryScreen(),
+        '/injury/rehab_exercises': (context) => RehabExercisesScreen(),
+        '/injury/medical_records': (context) => MedicalRecordsAccessScreen(),
+        '/injury/recovery_progress': (context) => RehabProgressPage(),
+        '/organization':(context)=>SportOrganizationHomePage(),
+        '/organization/scouting':(context)=>ScoutingDashboard()
       },
     );
   }
@@ -89,6 +95,8 @@ class _LandingPageState extends State<LandingPage> {
           .then((userCredential) {
             if (_selectedUserType == "Athlete") {
               Navigator.pushReplacementNamed(context, '/splash');
+            } else if (_selectedUserType == 'Organization') {
+              Navigator.pushReplacementNamed(context, '/organization');
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
