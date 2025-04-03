@@ -6,63 +6,63 @@ Committed to transforming the athletic landscape, AthleteVerse bridges gaps, sup
 
 User Types in AthleteVerse
 
-Athletes – Track performance, explore tournaments, manage injuries, secure sponsorships, plan finances, build a strong professional network, and shape a successful career.
+•Athletes – Track performance, explore tournaments, manage injuries, secure sponsorships, plan finances, build a strong professional network, and shape a successful career.
 
-Coaches – Design training programs, monitor athlete progress, provide expert mentorship, and connect with sponsors.
+•Coaches – Design training programs, monitor athlete progress, provide expert mentorship, and connect with sponsors.
 
-Sports Organizations – Scout talent, manage teams, collaborate with professionals, and facilitate sponsorship opportunities.
+•Sports Organizations – Scout talent, manage teams, collaborate with professionals, and facilitate sponsorship opportunities.
 
-Admins – Oversee platform operations, verify users, manage anonymous reports, conduct platform testing, and handle blogs, webinars, and community engagement.
+•Admins – Oversee platform operations, verify users, manage anonymous reports, conduct platform testing, and handle blogs, webinars, and community engagement.
 
 Key Features
 
-Athlete Authentication & Authorization
+•Athlete Authentication & Authorization
 
-Athlete Profile Creation & Management
+•Athlete Profile Creation & Management
 
-Performance Tracking & Analytics
+•Performance Tracking & Analytics
 
-Injury Prevention & Rehab
+•Injury Prevention & Rehab
 
-Quick Access to Medical Records
+•Quick Access to Medical Records
 
-AI-Powered Sponsorship Matchmaking
+•AI-Powered Sponsorship Matchmaking
 
-Sponsorship Contract Security & Insurance
+•Sponsorship Contract Security & Insurance
 
-Post-Sports Career Transition
+•Post-Sports Career Transition
 
-Smart Finance & Income Management
+•Smart Finance & Income Management
 
-Government Scheme Integration
+•Government Scheme Integration
 
-Rent & Exchange Sports Gear
+•Rent & Exchange Sports Gear
 
-Trip Cost Estimation & Budgeting
+•Trip Cost Estimation & Budgeting
 
-Visa & Documentation Assistance
+•Visa & Documentation Assistance
 
-Anonymous Reporting System
+•Anonymous Reporting System
 
-Dedicated Support for Para-Athletes
+•Dedicated Support for Para-Athletes
 
-Exclusive Safety & Opportunities for Women in Sports
+•Exclusive Safety & Opportunities for Women in Sports
 
-AI-Driven Mental Health Assistance
+•AI-Driven Mental Health Assistance
 
-E-Contract Sponsorship Security
+•E-Contract Sponsorship Security
 
-Doping Compliance & Fair Play
+•Doping Compliance & Fair Play
 
-Gamified Learning & AI-Driven Games
+•Gamified Learning & AI-Driven Games
 
-Arcade Zone – Interactive Games to Build Athletic Skills
+•Arcade Zone – Interactive Games to Build Athletic Skills
 
-Freelance & Part-Time Work for Athletes
+•Freelance & Part-Time Work for Athletes
 
-Athlete-Coach AI Matching
+•Athlete-Coach AI Matching
 
-Sports Community Hub
+•Sports Community Hub
 
 Expert Blogs & Webinars
 
