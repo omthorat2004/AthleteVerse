@@ -5,7 +5,7 @@ class ModuleCard extends StatelessWidget {
   final GameModule module;
   final VoidCallback onStart;
 
-  ModuleCard({required this.module, required this.onStart});
+  const ModuleCard({super.key, required this.module, required this.onStart});
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +44,16 @@ class ModuleCard extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: onStart,
-                child: Text(
-                  "Start Game",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   backgroundColor: Colors.blueAccent,
+                ),
+                child: Text(
+                  "Start Game",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             ),

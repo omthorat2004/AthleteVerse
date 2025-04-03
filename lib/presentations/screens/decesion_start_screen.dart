@@ -5,7 +5,7 @@ class StartScreen extends StatelessWidget {
   final int totalPoints;
   final String moduleName;
 
-  StartScreen({
+  const StartScreen({super.key, 
     required this.onStartPressed,
     required this.totalPoints,
     required this.moduleName,
@@ -44,11 +44,11 @@ class StartScreen extends StatelessWidget {
           SizedBox(height: 30),
           ElevatedButton(
             onPressed: onStartPressed,
-            child: Text("Start Game", style: TextStyle(fontSize: 18)),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
+            child: Text("Start Game", style: TextStyle(fontSize: 18)),
           ),
         ],
       ),

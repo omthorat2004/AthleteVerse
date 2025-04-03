@@ -10,10 +10,10 @@ class CalorieTrackerScreen extends StatefulWidget {
 class _CalorieTrackerScreenState extends State<CalorieTrackerScreen> {
   final TextEditingController _ingredientController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-  List<Map<String, dynamic>> _ingredients = [];
+  final List<Map<String, dynamic>> _ingredients = [];
   double _totalCalories = 0.0;
   bool _isSubmitted = false;
-  double _dailyGoal = 2000.0; // Default daily calorie goal
+  final double _dailyGoal = 2000.0; // Default daily calorie goal
 
   final Map<String, double> _ingredientCalories = {
     'apple': 0.52,
@@ -294,7 +294,7 @@ class _CalorieTrackerScreenState extends State<CalorieTrackerScreen> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             ),

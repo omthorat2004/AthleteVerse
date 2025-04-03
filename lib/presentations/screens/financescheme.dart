@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AthleteSchemesPage extends StatefulWidget {
+  const AthleteSchemesPage({super.key});
+
   @override
   _AthleteSchemesPageState createState() => _AthleteSchemesPageState();
 }
@@ -25,8 +27,8 @@ class _AthleteSchemesPageState extends State<AthleteSchemesPage> {
       "details":
           "TOPS provides financial assistance, coaching, and medical support to athletes preparing for the Olympics and other international competitions. It covers training abroad, coaching fees, and high-performance tracking.",
       "image":
-          "https://sportsauthorityofindia.nic.in/sai/assets/frontend/images/TOPS_Intro.jpg",
-      "link": "https://www.sportsauthorityofindia.nic.in/index1.asp?ls_id=1191"
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyDR7MeN7wjt0mBEMkxWa89tJtFGbbgZmeBw&s",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyDR7MeN7wjt0mBEMkxWa89tJtFGbbgZmeBw&s"
     },
     {
       "name": "Pension Scheme for Meritorious Sportspersons",
@@ -35,7 +37,7 @@ class _AthleteSchemesPageState extends State<AthleteSchemesPage> {
       "details":
           "This scheme offers lifelong financial support to retired athletes who have represented India in the Olympics, Asian Games, and Commonwealth Games. The pension varies from ₹12,000 to ₹20,000 per month based on achievements.",
       "image":
-          "https://sportsauthorityofindia.nic.in/sai/assets/frontend/images/TOPS_Intro.jpg",
+          "https://www.indiafilings.com/learn/wp-content/uploads/2018/08/Meritorious-Sportsperson-Pension-Scheme.jpg",
       "link": "https://yas.gov.in/sports/pension-scheme"
     },
   ];

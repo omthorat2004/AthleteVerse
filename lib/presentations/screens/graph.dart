@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class AthleteProgressScreen extends StatefulWidget {
+  const AthleteProgressScreen({super.key});
+
   @override
   _AthleteProgressScreenState createState() => _AthleteProgressScreenState();
 }
@@ -143,7 +145,7 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> with Sing
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
-          Container(
+          SizedBox(
             height: 300,
             child: LineChart(
               LineChartData(
@@ -219,7 +221,7 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> with Sing
               progress,
               _compareWithIdeal ? '${goals[metric]}' : null,
             );
-          }).toList(),
+          }),
           SizedBox(height: 20),
           _buildSuggestionTile(
             'You\'re on track to meet your yearly goals. Keep up the good work!',
@@ -247,7 +249,7 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> with Sing
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
-          Container(
+          SizedBox(
             height: 300,
             child: LineChart(
               LineChartData(
@@ -323,7 +325,7 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> with Sing
               progress,
               _compareWithIdeal ? '${goals[metric]}' : null,
             );
-          }).toList(),
+          }),
           SizedBox(height: 20),
           _buildSuggestionTile(
             'You\'re improving steadily. Focus on cardio to meet your monthly goals.',
@@ -558,7 +560,7 @@ class _AthleteProgressScreenState extends State<AthleteProgressScreen> with Sing
                   ],
                 ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

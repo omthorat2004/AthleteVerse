@@ -9,13 +9,13 @@
       "client_info": {
         "mobilesdk_app_id": "1:999454344530:android:fd79ab7555e4db52d9668b",
         "android_client_info": {
-          "package_name": "com.example.myapp"
+          "package_name": "com.example.newapp"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNGHxN0U9AXDpNWouy6qKNbLewtNodHO4"
+          "current_key": "AIzaSyBev-xZAv-91VwEkV3MoAO6vyLB-CqDQXY"
         }
       ],
       "services": {

@@ -4,7 +4,7 @@ class DialogueBox extends StatelessWidget {
   final String text;
   final Color color;
 
-  DialogueBox(this.text, this.color);
+  const DialogueBox(this.text, this.color, {super.key});
 
   @override
   Widget build(BuildContext context) {

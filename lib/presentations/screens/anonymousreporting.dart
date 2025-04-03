@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AnonymousReportScreen extends StatefulWidget {
-  const AnonymousReportScreen({Key? key}) : super(key: key);
+  const AnonymousReportScreen({super.key});
   @override
   State<AnonymousReportScreen> createState() => _AnonymousReportScreenState();
 }
@@ -334,7 +334,7 @@ class GoogleAuthClient extends http.BaseClient {
 }
 
 class LocationPickerScreen extends StatefulWidget {
-  const LocationPickerScreen({Key? key}) : super(key: key);
+  const LocationPickerScreen({super.key});
   @override
   State<LocationPickerScreen> createState() => _LocationPickerScreenState();
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChecklistScreen extends StatefulWidget {
-  const ChecklistScreen({Key? key}) : super(key: key);
+  const ChecklistScreen({super.key});
 
   @override
   _ChecklistScreenState createState() => _ChecklistScreenState();
@@ -15,15 +16,18 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   int _sets = 1;
   int _reps = 10;
   double _weight = 0.0;
-  List<Map<String, dynamic>> _exercises = [];
+  final List<Map<String, dynamic>> _exercises = [];
   bool _isWorkoutStarted = false;
-  List<Map<String, dynamic>> _workoutHistory = [];
-  int _dailyGoal = 5; // Example daily goal: 5 exercises
+  final List<Map<String, dynamic>> _workoutHistory = [];
+  final int _dailyGoal = 5; // Example daily goal: 5 exercises
   int _completedExercisesToday = 0;
 
   double _calculateProgress() {
     int totalSets = _exercises.fold(0, (int sum, item) => sum + (item['sets'] as int));
-    int completedSets = _exercises.fold(0, (int sum, item) => sum + (item['completedSets'] as List<bool>).where((c) => c).length);
+    int completedSets = _exercises.fold(0, (int sum, item) {
+      List<bool> completed = (item['completedSets'] as List).cast<bool>();
+      return sum + completed.where((c) => c).length;
+    });
     return totalSets == 0 ? 0.0 : completedSets.toDouble() / totalSets.toDouble();
   }
 
@@ -72,12 +76,13 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please start the workout first.")));
       return;
     }
-    bool allCompleted = _exercises.every((exercise) => exercise['completedSets'].every((completed) => completed));
+    bool allCompleted = _exercises.every((exercise) => 
+      (exercise['completedSets'] as List<bool>).every((completed) => completed));
     if (allCompleted) {
       setState(() {
         _workoutHistory.add({
           'date': DateTime.now(),
-          'exercises': List.from(_exercises),
+          'exercises': List<Map<String, dynamic>>.from(_exercises),
         });
         _completedExercisesToday += _exercises.length;
         _isWorkoutStarted = false;
@@ -103,7 +108,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Great job! You’ve completed your workout.'),
+              const Text("Great job! You've completed your workout."),
               const SizedBox(height: 16),
               LinearProgressIndicator(
                 value: _completedExercisesToday / _dailyGoal,
@@ -138,9 +143,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 
   String _getTodaySuggestion() {
     if (_completedExercisesToday >= _dailyGoal) {
-      return '💡 You’ve reached your daily goal! Keep up the great work!';
+      return "💡 You've reached your daily goal! Keep up the great work!";
     } else {
-      return '💡 You’re making progress! Aim to complete your daily goal of $_dailyGoal exercises.';
+      return "💡 You're making progress! Aim to complete your daily goal of $_dailyGoal exercises.";
     }
   }
 
@@ -276,7 +281,8 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                       ],
                     ),
             ),
-            if (_isWorkoutStarted && _exercises.every((exercise) => exercise['completedSets'].every((completed) => completed)))
+            if (_isWorkoutStarted && _exercises.every((exercise) => 
+                (exercise['completedSets'] as List<bool>).every((completed) => completed)))
               _buildPrimaryButton('✅ Finish Workout', _finishChecklist),
             if (!_isWorkoutStarted && _exercises.isNotEmpty)
               _buildPrimaryButton('🚀 Start Workout', _startChecklist),
@@ -330,6 +336,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   }
 
   Widget _buildExerciseCard(int index) {
+    final exercise = _exercises[index];
     return Card(
       color: Colors.white,
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -337,12 +344,12 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
       elevation: 4,
       child: ListTile(
         title: Text(
-          _exercises[index]['name'], 
+          exercise['name'], 
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          '${_exercises[index]['sets']} Sets, ${_exercises[index]['reps']} Reps'
-          '${_exercises[index]['weight'] != null ? ', ${_exercises[index]['weight']} kg' : ''}'
+          '${exercise['sets']} Sets, ${exercise['reps']} Reps'
+          '${exercise['weight'] != null ? ', ${exercise['weight']} kg' : ''}'
         ),
         trailing: IconButton(
           icon: const Icon(Icons.delete, color: Colors.red),
@@ -353,24 +360,30 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
             showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
-                return StatefulBuilder(
-                  builder: (context, setStateModal) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(_exercises[index]['sets'], (setIndex) {
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Mark sets as completed',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                      const SizedBox(height: 16),
+                      ...List.generate(exercise['sets'], (setIndex) {
                         return CheckboxListTile(
                           title: Text('Set ${setIndex + 1}'),
-                          value: _exercises[index]['completedSets'][setIndex] ?? false,
+                          value: (exercise['completedSets'] as List<bool>)[setIndex],
                           onChanged: (bool? value) {
                             setState(() {
                               _toggleSet(index, setIndex);
                             });
-                            setStateModal(() {}); // Update modal UI without closing
+                            Navigator.pop(context); // Close the bottom sheet
                           },
                         );
                       }),
-                    );
-                  },
+                    ],
+                  ),
                 );
               },
             );
@@ -394,7 +407,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 class WorkoutHistoryScreen extends StatelessWidget {
   final List<Map<String, dynamic>> workoutHistory;
 
-  const WorkoutHistoryScreen({Key? key, required this.workoutHistory}) : super(key: key);
+  const WorkoutHistoryScreen({super.key, required this.workoutHistory});
 
   @override
   Widget build(BuildContext context) {
@@ -403,24 +416,34 @@ class WorkoutHistoryScreen extends StatelessWidget {
         title: const Text('Workout History'),
         backgroundColor: Colors.blue,
       ),
-      body: ListView.builder(
-        itemCount: workoutHistory.length,
-        itemBuilder: (context, index) {
-          final workout = workoutHistory[index];
-          return Card(
-            margin: const EdgeInsets.all(8),
-            child: ListTile(
-              title: Text('Workout on ${workout['date'].toString()}'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: workout['exercises'].map<Widget>((exercise) {
-                  return Text('${exercise['name']}: ${exercise['sets']} Sets, ${exercise['reps']} Reps${exercise['weight'] != null ? ', ${exercise['weight']} kg' : ''}');
-                }).toList(),
+      body: workoutHistory.isEmpty
+          ? const Center(
+              child: Text(
+                'No workout history yet!',
+                style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
+            )
+          : ListView.builder(
+              itemCount: workoutHistory.length,
+              itemBuilder: (context, index) {
+                final workout = workoutHistory[index];
+                return Card(
+                  margin: const EdgeInsets.all(8),
+                  child: ExpansionTile(
+                    title: Text('Workout on ${DateFormat('MMM dd, yyyy - hh:mm a').format(workout['date'])}'),
+                    children: workout['exercises'].map<Widget>((exercise) {
+                      return ListTile(
+                        title: Text(exercise['name']),
+                        subtitle: Text(
+                          '${exercise['sets']} Sets, ${exercise['reps']} Reps'
+                          '${exercise['weight'] != null ? ', ${exercise['weight']} kg' : ''}'
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

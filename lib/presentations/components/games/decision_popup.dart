@@ -22,7 +22,7 @@ class DecisionPopup {
                   onPressed: () => onDecision(option),
                   child: Text(option),
                 ),
-              )).toList(),
+              )),
             ],
           ),
         );

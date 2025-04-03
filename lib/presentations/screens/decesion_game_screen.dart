@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import '../components/games/character_widget.dart';
 import '../components/games/decision_popup.dart';
-import '../components/games/dialogue_box.dart';
 import 'decesion_start_screen.dart';
 
 class GameScreen extends StatefulWidget {
@@ -12,8 +11,8 @@ class GameScreen extends StatefulWidget {
   const GameScreen({
     required this.moduleName,
     required this.totalPoints,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -252,10 +251,10 @@ class _GameScreenState extends State<GameScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
                     onPressed: showNextDialogue,
-                    child: const Text("Continue"),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(200, 50),
                     ),
+                    child: const Text("Continue"),
                   ),
                 ),
               ],

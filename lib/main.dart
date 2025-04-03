@@ -7,30 +7,91 @@ import 'package:myapp/presentations/screens/organizations/organizationhome.dart'
 import 'package:myapp/presentations/screens/organizations/scouringdashboard.dart';
 import 'package:myapp/presentations/screens/rehab_exercises.dart';
 import 'package:myapp/presentations/screens/rehab_progress.dart';
+import 'package:myapp/presentations/screens/riskprediction.dart';
 import 'package:myapp/presentations/screens/splash.dart';
-// import 'package:myapp/presentations/screens/comentarygame.dart';
 import 'package:myapp/presentations/screens/financescheme.dart';
 import 'package:myapp/presentations/screens/gamezone.dart';
 import 'package:myapp/presentations/screens/rentpage.dart';
 import 'package:myapp/presentations/screens/travelcostpage.dart';
 import 'package:myapp/presentations/screens/wearable_data.dart';
+import 'package:myapp/presentations/screens/webinar_page.dart';
+import 'package:myapp/presentations/screens/yoyotest.dart';
+import 'presentations/screens/careerpath.dart';
+import 'presentations/screens/careerplaningoverview.dart';
+import 'presentations/screens/careerplanning.dart';
 import 'presentations/screens/finance.dart' show FinanceScreen;
+import 'presentations/screens/game.dart';
 import 'presentations/screens/home.dart';
 import 'presentations/screens/features.dart';
+import 'presentations/screens/mentorship.dart';
 import 'presentations/screens/performancetracking.dart';
 import 'presentations/screens/checklist.dart';
 import 'presentations/screens/graph.dart';
-import 'presentations/screens/game.dart';
 import 'presentations/screens/financedashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'presentations/screens/chatbot.dart';
 import 'presentations/screens/injury.dart';
+import 'presentations/screens/rankingqualifications.dart';
+import 'presentations/screens/upcomingscreen.dart';
+import 'presentations/screens/videoinsight.dart';
 
-void main() async {
+// Add this right after your imports
+AthleteProfile getDefaultAthlete() {
+  return AthleteProfile(
+    name: "Aman Singh",
+    photoUrl: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5",
+    sport: "Football",
+    position: "Forward",
+    lastAssessment: "2024-11-15",
+    riskScore: 68,
+    highRiskAreas: [
+      BodyAreaRisk(
+        area: "Right Hamstring",
+        risk: 72,
+        details: "2.5x higher load than left side in last 3 sessions",
+        xPosition: 100,
+        yPosition: 180,
+      ),
+      BodyAreaRisk(
+        area: "Left Ankle",
+        risk: 45,
+        details: "Reduced dorsiflexion from previous injury",
+        xPosition: 60,
+        yPosition: 220,
+      ),
+    ],
+    fatigueLevel: 78,
+    muscleImbalance: 22,
+    movementQuality: 6.5,
+    workloadRatio: 1.4,
+    topInjuryRisks: [
+      InjuryRisk(
+        type: "Hamstring Strain",
+        risk: 72,
+        description: "High sprint volume with imbalance detected",
+      ),
+      InjuryRisk(
+        type: "Ankle Sprain",
+        risk: 45,
+        description: "Previous injury + reduced mobility",
+      ),
+    ],
+    riskHistory: [
+      RiskData(date: "Sep", value: 42),
+      RiskData(date: "Oct", value: 55),
+      RiskData(date: "Nov", value: 68),
+    ],
+    trainingModifications: [
+      "Reduce sprint volume by 20% this week",
+      "Add 2 yoga sessions for mobility",
+    ],
+  );
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  
   runApp(AthleteManagementApp());
 }
 
@@ -64,9 +125,43 @@ class AthleteManagementApp extends StatelessWidget {
         '/injury/rehab_exercises': (context) => RehabExercisesScreen(),
         '/injury/medical_records': (context) => MedicalRecordsAccessScreen(),
         '/injury/recovery_progress': (context) => RehabProgressPage(),
-        '/organization':(context)=>SportOrganizationHomePage(),
-        '/organization/scouting':(context)=>ScoutingDashboard()
+        '/organization': (context) => SportOrganizationHomePage(),
+        '/organization/scouting': (context) => ScoutingDashboard(),
+        '/injury/risk_prediction': (context) => InjuryRiskPredictionPage(athlete: getDefaultAthlete()),
+        '/webinars': (context) => WebinarsPage(),
+        '/video_insight': (context) => AthleteExerciseInsightsPage(),
+        '/careerplanning': (context) => CareerPlanningScreen(),
+        '/careerplanning/overview': (context) => CareerOverviewScreen(),
+        '/careerplanning/path': (context) => MyCareerPathScreen(),
+        '/careerplanning/ranking': (context) => RankingQualificationScreen(),
+        '/careerplanning/tournaments': (context) => UpcomingTournamentsScreen(),
+        '/careerplanning/advice': (context) => ExpertAdviceScreen(),
+        '/yoyo_test': (context) => YoYoTestScreen(cameras: [],)
       },
+    );
+  }
+
+  static Widget _buildWebNotSupported() {
+    return Scaffold(
+      appBar: AppBar(title: Text('Yo-Yo Test')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.videocam_off, size: 64, color: Colors.grey),
+            SizedBox(height: 20),
+            Text(
+              'Yo-Yo Test not available on web',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Please use the mobile app for this feature',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -83,7 +178,7 @@ class _LandingPageState extends State<LandingPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String? _selectedUserType;
-  String _verificationId = '';
+  final String _verificationId = '';
 
   void _login() {
     if (_formKey.currentState!.validate()) {
@@ -140,7 +235,6 @@ class _LandingPageState extends State<LandingPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Email Field
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -165,7 +259,6 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                     SizedBox(height: 15),
 
-                    // Password Field
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -188,7 +281,6 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                     SizedBox(height: 15),
 
-                    // User Type Dropdown
                     DropdownButtonFormField<String>(
                       decoration: InputDecoration(
                         labelText: 'Select User Type',
@@ -199,31 +291,18 @@ class _LandingPageState extends State<LandingPage> {
                         fillColor: Colors.white,
                       ),
                       value: _selectedUserType,
-                      items:
-                          [
-                                'Athlete',
-                                'Coach',
-                                'Organization',
-                                'Sponsors',
-                                'Admin',
-                              ]
-                              .map(
-                                (type) => DropdownMenuItem(
-                                  value: type,
-                                  child: Text(type),
-                                ),
-                              )
-                              .toList(),
+                      items: ['Athlete', 'Coach', 'Organization', 'Sponsors', 'Admin']
+                          .map((type) => DropdownMenuItem(
+                                value: type,
+                                child: Text(type),
+                              ))
+                          .toList(),
                       onChanged: (value) {
                         setState(() {
                           _selectedUserType = value;
                         });
                       },
-                      validator:
-                          (value) =>
-                              value == null
-                                  ? 'Please select a user type'
-                                  : null,
+                      validator: (value) => value == null ? 'Please select a user type' : null,
                     ),
                     SizedBox(height: 20),
 

@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
     _textController = TextEditingController();
     _textFieldFocusNode = FocusNode();
-     Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       if (_showSpendingAlert) {
         showDialog<void>(
           context: context,
@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
-                
                     Navigator.of(context).pop();
                   },
                   child: const Text('Set Budget'),
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 TextButton(
                   onPressed: () {
                     setState(() {
-                       _showSpendingAlert= false;
+                      _showSpendingAlert = false;
                     });
                     Navigator.of(context).pop();
                   },
@@ -143,7 +142,6 @@ class _HomeContentState extends State<HomeContent> {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Search...',
@@ -165,7 +163,7 @@ class _HomeContentState extends State<HomeContent> {
             message: "Report any issue anonymously",
             child: ElevatedButton.icon(
               onPressed: () {
-                Navigator.pushNamed(context,'/anonymousreporting');
+                Navigator.pushNamed(context, '/anonymousreporting');
               },
               icon: Icon(Icons.privacy_tip, size: 24, color: Colors.white),
               label: Text(
@@ -185,7 +183,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
             ),
-          ),          
+          ),
           const SizedBox(height: 10),
           GridView.count(
             shrinkWrap: true,
@@ -196,33 +194,40 @@ class _HomeContentState extends State<HomeContent> {
             childAspectRatio: 1,
             children: [
               _buildGridItem(
+                context: context,
                 title: 'Webinars',
                 description: 'Join Live Sessions & Workshops',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/rtn68wbgkpyc/webinar_(3).png',
+                routeName: '/webinars',
               ),
               _buildGridItem(
+                context: context,
                 title: 'Career Planning',
                 description: 'Shape Your Athletic Future',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/14s2iu3z58uq/career-path.png',
+                routeName: '/careerplanning',
               ),
               _buildGridItem(
+                context: context,
                 title: 'Organizations',
                 description: 'Connect with sports bodies',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/ckfcuipvqru9/partners.png',
+                routeName: '/organizations',
               ),
               _buildGridItem(
+                context: context,
                 title: 'Finances',
                 description: 'Manage your resources',
                 imageUrl:
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/athlete-verse-duco0h/assets/5z2y7rn2b554/budget.png',
+                routeName: '/finance',
               ),
             ],
           ),
           const SizedBox(height: 20),
-          
           Text(
             'Top Organizations',
             style: GoogleFonts.openSans(
@@ -259,9 +264,11 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Widget _buildGridItem({
+    required BuildContext context,
     required String title,
     required String description,
     required String imageUrl,
+    required String routeName,
   }) {
     bool isHovered = false;
 
@@ -270,76 +277,79 @@ class _HomeContentState extends State<HomeContent> {
         return MouseRegion(
           onEnter: (_) => setState(() => isHovered = true),
           onExit: (_) => setState(() => isHovered = false),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF2979FF), Color(0xFF0091EA)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, routeName);
+            },
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF2979FF), Color(0xFF0091EA)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              borderRadius: BorderRadius.circular(18),
-              boxShadow: [
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(8), // Adjust padding if needed
-            child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Centers content vertically
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(2),
-                  child: Image.network(
-                    imageUrl,
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (
-                      BuildContext context,
-                      Widget child,
-                      ImageChunkEvent? loadingProgress,
-                    ) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value:
-                              loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 8), // Space between image and text
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.openSans(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                AnimatedOpacity(
-                  opacity: isHovered ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 200),
-                  child: Text(
-                    description,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      color: Colors.white70,
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(2),
+                    child: Image.network(
+                      imageUrl,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (
+                        BuildContext context,
+                        Widget child,
+                        ImageChunkEvent? loadingProgress,
+                      ) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.openSans(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  AnimatedOpacity(
+                    opacity: isHovered ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Text(
+                      description,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -362,7 +372,6 @@ class _HomeContentState extends State<HomeContent> {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    // ignore: deprecated_member_use
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 5,
@@ -389,11 +398,10 @@ class _HomeContentState extends State<HomeContent> {
                         if (loadingProgress == null) return child;
                         return Center(
                           child: CircularProgressIndicator(
-                            value:
-                                loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
                           ),
                         );
                       },

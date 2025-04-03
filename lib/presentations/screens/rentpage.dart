@@ -25,6 +25,8 @@ class SportKit {
 }
 
 class SportsKitPage extends StatefulWidget {
+  const SportsKitPage({super.key});
+
   @override
   _SportsKitPageState createState() => _SportsKitPageState();
 }
@@ -325,7 +327,7 @@ class _SportsKitPageState extends State<SportsKitPage> {
 class SportKitCard extends StatelessWidget {
   final SportKit sportKit;
 
-  const SportKitCard({Key? key, required this.sportKit}) : super(key: key);
+  const SportKitCard({super.key, required this.sportKit});
 
   @override
   Widget build(BuildContext context) {
@@ -479,12 +481,12 @@ class FilterDropdown extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const FilterDropdown({
-    Key? key,
+    super.key,
     required this.value,
     required this.items,
     required this.label,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

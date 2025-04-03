@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class IncomeEarningsOverview extends StatefulWidget {
+  const IncomeEarningsOverview({super.key});
+
   @override
   _IncomeEarningsOverviewState createState() => _IncomeEarningsOverviewState();
 }

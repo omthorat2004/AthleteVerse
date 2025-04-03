@@ -10,7 +10,7 @@ class CharacterWidget extends StatelessWidget {
   final String dialogue;
   final Color bubbleColor;
 
-  CharacterWidget({
+  const CharacterWidget({super.key, 
     required this.characterName,
     required this.animationFile,
     required this.controller,
@@ -27,7 +27,7 @@ class CharacterWidget extends StatelessWidget {
         Stack(
           alignment: Alignment.topCenter,
           children: [
-            Container(
+            SizedBox(
               height: 250,
               width: 250,
               child: RiveAnimation.asset(

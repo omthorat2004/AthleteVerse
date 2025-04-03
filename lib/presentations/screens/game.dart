@@ -18,6 +18,8 @@ class ModuleSelectionScreen extends StatelessWidget {
     ),
   ];
 
+   ModuleSelectionScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

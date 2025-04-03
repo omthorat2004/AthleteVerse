@@ -81,6 +81,16 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                     Navigator.pushNamed(context, '/finance');
                   },
                 ),
+               _buildFeatureButton(
+  context,
+  label: 'Career Planning',
+  icon: Icons.work,
+  color: Colors.blue.shade700,
+  onTap: () {
+    Navigator.pushNamed(context, '/careerplanning');
+  },
+),
+
               ],
             ),
           ),

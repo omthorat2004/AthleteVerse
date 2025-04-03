@@ -328,7 +328,7 @@ class WearableDataPage extends StatelessWidget {
                   ),
                 ],
               ),
-            )).toList(),
+            )),
           ],
         ),
       ),

@@ -1,1 +1,34 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"athleteverse-b8b06","appId":"1:999454344530:android:fd79ab7555e4db52d9668b","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"athleteverse-b8b06","configurations":{"android":"1:999454344530:android:fd79ab7555e4db52d9668b","web":"1:999454344530:web:d0d4a65efb6c2bf3d9668b"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "athleteverse-b8b06",
+          "appId": "1:999454344530:android:fd79ab7555e4db52d9668b",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "athleteverse-b8b06",
+          "configurations": {
+            "android": "1:999454344530:android:fd79ab7555e4db52d9668b",
+            "web": "1:999454344530:web:d0d4a65efb6c2bf3d9668b"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "site": "athleteverse",
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}

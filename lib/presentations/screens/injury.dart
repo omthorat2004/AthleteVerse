@@ -51,7 +51,7 @@ class _InjuryScreenState extends State<InjuryScreen>
                   icon: Icons.warning_amber_rounded,
                   color: Colors.orange,
                   onTap: () {
-                    Navigator.pushNamed(context, '/risk_prediction');
+                    Navigator.pushNamed(context, '/injury/risk_prediction');
                   },
                 ),
                 _buildFeatureButton(

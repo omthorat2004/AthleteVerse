@@ -298,11 +298,11 @@ class _MedicalRecordsAccessScreenState extends State<MedicalRecordsAccessScreen>
                     const SnackBar(content: Text("Access settings saved")),
                   );
                 },
-                child: const Text("Save Changes"),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.blue[800],
                 ),
+                child: const Text("Save Changes"),
               ),
             ),
           ],

@@ -18,13 +18,7 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white, Colors.blueAccent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+       
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -32,10 +26,10 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
               child: GridView(
                 padding: const EdgeInsets.only(top: 20),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, 
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
-                  mainAxisSpacing: 10, 
-                  childAspectRatio: 1.2, 
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 1.2,
                 ),
                 children: [
                   _buildFeatureButton(
@@ -65,13 +59,30 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                       Navigator.pushNamed(context, '/calorie');
                     },
                   ),
-                   _buildFeatureButton(
+                  _buildFeatureButton(
                     context,
                     label: 'Wearable Data',
-                    icon: Icons.calculate,
+                    icon: Icons.fitness_center,
                     onTap: () {
-                      // Navigate to Calorie Calculator screen
+                      // Navigate to Wearable Data screen
                       Navigator.pushNamed(context, '/wearable_data');
+                    },
+                  ),
+                  _buildFeatureButton(
+                    context,
+                    label: 'Video Insight',
+                    icon: Icons.camera,
+                    onTap: () {
+                      // Navigate to Video Insight screen
+                      Navigator.pushNamed(context, '/video_insight');
+                    },
+                  ),
+                  _buildFeatureButton(
+                    context,
+                    label: 'Yo-Yo Test',
+                    icon: Icons.directions_run,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/yoyo_test');
                     },
                   ),
                 ],
@@ -115,44 +126,46 @@ class _AnimatedFeatureButtonState extends State<_AnimatedFeatureButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => setState(() => isHovered = true), // Hover effect
+      onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
       child: GestureDetector(
-        onTapDown: (_) => setState(() => isPressed = true), // Click effect
+        onTapDown: (_) => setState(() => isPressed = true),
         onTapUp: (_) => setState(() => isPressed = false),
         onTapCancel: () => setState(() => isPressed = false),
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
-          transform: Matrix4.identity()
-            ..scale(isHovered ? 1.05 : 1.0) // Slightly enlarge on hover
-            ..scale(isPressed ? 0.95 : 1.0), // Shrink slightly when clicked
+          transform:
+              Matrix4.identity()
+                ..scale(isHovered ? 1.05 : 1.0)
+                ..scale(isPressed ? 0.95 : 1.0),
           decoration: BoxDecoration(
-            color: isHovered ? Colors.blue.shade50 : Colors.white, // Background change on hover
+            color: isHovered ? Colors.blue.shade50 : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.blue, width: 2),
-            boxShadow: isHovered
-                ? [
-                    BoxShadow(
-                      color: Colors.blue.shade200,
-                      blurRadius: 10,
-                      offset: const Offset(2, 2),
-                    )
-                  ]
-                : [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 4,
-                      offset: const Offset(2, 2),
-                    ),
-                  ],
+            boxShadow:
+                isHovered
+                    ? [
+                      BoxShadow(
+                        color: Colors.blue.shade200,
+                        blurRadius: 10,
+                        offset: const Offset(2, 2),
+                      ),
+                    ]
+                    : [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        offset: const Offset(2, 2),
+                      ),
+                    ],
           ),
           padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(widget.icon, size: 50, color: Colors.blue), // Large Icon
+              Icon(widget.icon, size: 50, color: Colors.blue),
               const SizedBox(height: 10),
               Text(
                 widget.label,
