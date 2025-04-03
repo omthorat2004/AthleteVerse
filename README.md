@@ -1,4 +1,4 @@
-AthleteVerse
+<h1>AthleteVerse</h1>
 
 AthleteVerse is a comprehensive platform revolutionizing the Indian sports ecosystem by empowering athletes both on and off the field. Built with Flutter, Firebase, and Google Cloud, it tackles key challenges like resource accessibility, injury prevention, career development, and financial planning. From AI-driven performance tracking to mentorship and gamified learning, AthleteVerse provides an all-in-one solution that fosters growth, inclusivity, and accessibility in sports.
 
@@ -28,41 +28,41 @@ Key Features
 
 •AI-Powered Sponsorship Matchmaking
 
-•Sponsorship Contract Security & Insurance
+Sponsorship Contract Security & Insurance
 
-•Post-Sports Career Transition
+Post-Sports Career Transition
 
-•Smart Finance & Income Management
+Smart Finance & Income Management
 
-•Government Scheme Integration
+Government Scheme Integration
 
-•Rent & Exchange Sports Gear
+Rent & Exchange Sports Gear
 
-•Trip Cost Estimation & Budgeting
+Trip Cost Estimation & Budgeting
 
-•Visa & Documentation Assistance
+Visa & Documentation Assistance
 
-•Anonymous Reporting System
+Anonymous Reporting System
 
-•Dedicated Support for Para-Athletes
+Dedicated Support for Para-Athletes
 
-•Exclusive Safety & Opportunities for Women in Sports
+Exclusive Safety & Opportunities for Women in Sports
 
-•AI-Driven Mental Health Assistance
+AI-Driven Mental Health Assistance
 
-•E-Contract Sponsorship Security
+E-Contract Sponsorship Security
 
-•Doping Compliance & Fair Play
+Doping Compliance & Fair Play
 
-•Gamified Learning & AI-Driven Games
+Gamified Learning & AI-Driven Games
 
-•Arcade Zone – Interactive Games to Build Athletic Skills
+Arcade Zone – Interactive Games to Build Athletic Skills
 
-•Freelance & Part-Time Work for Athletes
+Freelance & Part-Time Work for Athletes
 
-•Athlete-Coach AI Matching
+Athlete-Coach AI Matching
 
-•Sports Community Hub
+Sports Community Hub
 
 Expert Blogs & Webinars
 
