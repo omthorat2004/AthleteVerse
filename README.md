@@ -85,8 +85,25 @@ AthleteVerse isn’t just an app—It’s a movement to revolutionize sports, em
 
 
 ## 👥 Team AthleteVerse
+<table>
+  <tr>
+    <td align="center">
+      <img src="team/aman.JPG" width="150"/><br/>
+      <b>Aman Singh</b>
+    </td>
+    <td align="center">
+      <img src="team/khushishinde.jpg" width="150"/><br/>
+      <b>Khushi Shinde</b>
+    </td>
+    <td align="center">
+      <img src="team/khushiborde.jpg" width="150"/><br/>
+      <b>Khushi Borde</b>
+    </td>
+    <td align="center">
+      <img src="team/om.jpeg" width="150"/><br/>
+      <b>Om Thorat</b>
+    </td>
+  </tr>
+</table>
 
-| ![](team/aman.JPG) | ![](team/khushishinde.jpg) | ![](team/khushiborde.jpg) | ![](team/om.jpeg) |
-|:------------------:|:--------------------------:|:--------------------------:|:-----------------:|
-| **Aman Singh**     | **Khushi Shinde**          | **Khushi Borde**           | **Om Thorat**      |
 
