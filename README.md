@@ -45,12 +45,27 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 - Expert Webinars
 </div>
 
-## 🖼️ Screenshots
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-
-![Screenshot 1](screenshots/1.jpeg) ![Screenshot 2](screenshots/2.jpeg) ![Screenshot 3](screenshots/3.jpeg)
-![Screenshot 4](screenshots/4.jpeg) ![Screenshot 5](screenshots/5.jpeg) ![Screenshot 6](screenshots/6.jpeg)
-</div>
+| Screenshot 1           | Screenshot 2           | Screenshot 3           |
+|------------------------|------------------------|------------------------|
+| ![](screenshots/1.jpeg)  | ![](screenshots/2.jpeg)  | ![](screenshots/3.jpeg)  |
+| Screenshot 4           | Screenshot 5           | Screenshot 6           |
+| ![](screenshots/4.jpeg)  | ![](screenshots/5.jpeg)  | ![](screenshots/6.jpeg)  |
+| Screenshot 7           | Screenshot 8           | Screenshot 9           |
+| ![](screenshots/7.jpeg)  | ![](screenshots/8.jpeg)  | ![](screenshots/9.jpeg)  |
+| Screenshot 10          | Screenshot 11          | Screenshot 12          |
+| ![](screenshots/10.jpeg) | ![](screenshots/11.jpeg) | ![](screenshots/12.jpeg) |
+| Screenshot 13          | Screenshot 14          | Screenshot 15          |
+| ![](screenshots/13.jpeg) | ![](screenshots/14.jpeg) | ![](screenshots/15.jpeg) |
+| Screenshot 16          | Screenshot 17          | Screenshot 18          |
+| ![](screenshots/16.jpeg) | ![](screenshots/17.jpeg) | ![](screenshots/18.jpeg) |
+| Screenshot 19          | Screenshot 20          | Screenshot 21          |
+| ![](screenshots/19.jpeg) | ![](screenshots/20.jpeg) | ![](screenshots/21.jpeg) |
+| Screenshot 22          | Screenshot 23          | Screenshot 24          |
+| ![](screenshots/22.jpeg) | ![](screenshots/23.jpeg) | ![](screenshots/24.jpeg) |
+| Screenshot 25          | Screenshot 26          | Screenshot 27          |
+| ![](screenshots/25.jpeg) | ![](screenshots/26.jpeg) | ![](screenshots/27.jpeg) |
+| Screenshot 28          | Screenshot 29          |                        |
+| ![](screenshots/28.jpeg) | ![](screenshots/29.jpeg) |                        |
 
 ## 👥 Team AthleteVerse
 From **Jawaharlal Nehru Engineering College**, Mahatma Gandhi University, Chh. Sambhajinagar
