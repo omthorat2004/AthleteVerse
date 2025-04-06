@@ -82,28 +82,39 @@ Team AthleteVerse from Jawaharlal Nehru Engineering College, Mahatma Gandhi Univ
 
 
 AthleteVerse isn’t just an app—It’s a movement to revolutionize sports, empower athletes, and ensure every talent gets the chance to shine!!!
-
-
 ## 👥 Team AthleteVerse
+
+Team AthleteVerse is a passionate group of innovators from **Jawaharlal Nehru Engineering College**, affiliated with **Mahatma Gandhi University, Chh. Sambhajinagar**. United by a shared vision to transform the Indian sports ecosystem, we’re dedicated to building scalable, inclusive, and tech-driven solutions that empower athletes at every level.
+
+---
+
+## 🚀 Contributors
+
 <table>
   <tr>
     <td align="center">
-      <img src="team/aman.JPG" width="150"/><br/>
-      <b>Aman Singh</b>
+      <a href="https://www.linkedin.com/in/aman-singh35/" target="_blank">
+        <img src="team/aman.JPG" width="150"/><br/>
+        <b>Aman Singh</b>
+      </a>
     </td>
     <td align="center">
-      <img src="team/khushishinde.jpg" width="150"/><br/>
-      <b>Khushi Shinde</b>
+      <a href="https://www.linkedin.com/in/khushi-shinde-b32287291" target="_blank">
+        <img src="team/khushishinde.jpg" width="150"/><br/>
+        <b>Khushi Shinde</b>
+      </a>
     </td>
     <td align="center">
-      <img src="team/khushiborde.jpg" width="150"/><br/>
-      <b>Khushi Borde</b>
+      <a href="https://www.linkedin.com/in/khushi-borde-759258303" target="_blank">
+        <img src="team/khushiborde.jpg" width="150"/><br/>
+        <b>Khushi Borde</b>
+      </a>
     </td>
     <td align="center">
-      <img src="team/om.jpeg" width="150"/><br/>
-      <b>Om Thorat</b>
+      <a href="https://www.linkedin.com/in/omthoratcse/" target="_blank">
+        <img src="team/om.jpeg" width="150"/><br/>
+        <b>Om Thorat</b>
+      </a>
     </td>
   </tr>
 </table>
-
-
