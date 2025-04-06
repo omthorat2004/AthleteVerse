@@ -13,19 +13,28 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 - **Admins** – Oversee platform operations, verify users, manage anonymous reports, conduct platform testing, and handle blogs, webinars, and community engagement.
 
 ## 🧪 Prototype Screenshots
-
-| Screenshot 1 | Screenshot 2 | Screenshot 3 |
-|--------------|--------------|--------------|
-| ![](screenshots/28.jpeg) | ![](screenshots/2.jpeg) | ![](screenshots/3.jpeg) |
-| ![](screenshots/4.jpeg) | ![](screenshots/5.jpeg) | ![](screenshots/6.jpeg) |
-| ![](screenshots/7.jpeg) | ![](screenshots/8.jpeg) | ![](screenshots/9.jpeg) |
+| Screenshot 1           | Screenshot 2           | Screenshot 3           |
+|------------------------|------------------------|------------------------|
+| ![](screenshots/1.jpeg)  | ![](screenshots/2.jpeg)  | ![](screenshots/3.jpeg)  |
+| Screenshot 4           | Screenshot 5           | Screenshot 6           |
+| ![](screenshots/4.jpeg)  | ![](screenshots/5.jpeg)  | ![](screenshots/6.jpeg)  |
+| Screenshot 7           | Screenshot 8           | Screenshot 9           |
+| ![](screenshots/7.jpeg)  | ![](screenshots/8.jpeg)  | ![](screenshots/9.jpeg)  |
+| Screenshot 10          | Screenshot 11          | Screenshot 12          |
 | ![](screenshots/10.jpeg) | ![](screenshots/11.jpeg) | ![](screenshots/12.jpeg) |
+| Screenshot 13          | Screenshot 14          | Screenshot 15          |
 | ![](screenshots/13.jpeg) | ![](screenshots/14.jpeg) | ![](screenshots/15.jpeg) |
+| Screenshot 16          | Screenshot 17          | Screenshot 18          |
 | ![](screenshots/16.jpeg) | ![](screenshots/17.jpeg) | ![](screenshots/18.jpeg) |
+| Screenshot 19          | Screenshot 20          | Screenshot 21          |
 | ![](screenshots/19.jpeg) | ![](screenshots/20.jpeg) | ![](screenshots/21.jpeg) |
+| Screenshot 22          | Screenshot 23          | Screenshot 24          |
 | ![](screenshots/22.jpeg) | ![](screenshots/23.jpeg) | ![](screenshots/24.jpeg) |
+| Screenshot 25          | Screenshot 26          | Screenshot 27          |
 | ![](screenshots/25.jpeg) | ![](screenshots/26.jpeg) | ![](screenshots/27.jpeg) |
-| ![](screenshots/1.jpeg) | ![](screenshots/29.jpeg) |  |
+| Screenshot 28          | Screenshot 29          |                        |
+| ![](screenshots/28.jpeg) | ![](screenshots/29.jpeg) |                        |
+
 
 
 ## <span style="color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px;">Key Features of AthleteVerse</span>
