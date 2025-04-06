@@ -12,6 +12,20 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 - **Sports Organizations** – Scout talent, manage teams, collaborate with professionals, and facilitate sponsorship opportunities.
 - **Admins** – Oversee platform operations, verify users, manage anonymous reports, conduct platform testing, and handle blogs, webinars, and community engagement.
 
+
+
+## 🚀 Quick Start (Google IDX)
+
+1. Go to [https://idx.dev](https://idx.dev) and login
+2. Create new workspace → Git Repository
+3. Paste URL: `https://github.com/omthorat2004/AthleteVerse.git`
+4. Click Create Workspace
+
+```bash
+# After workspace loads:
+flutter pub get
+flutter run -d web-server
+
 ## 🧪 Prototype Screenshots
 | Screenshot 1           | Screenshot 2           | Screenshot 3           |
 |------------------------|------------------------|------------------------|
