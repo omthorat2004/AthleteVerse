@@ -83,3 +83,10 @@ Team AthleteVerse from Jawaharlal Nehru Engineering College, Mahatma Gandhi Univ
 
 AthleteVerse isn’t just an app—It’s a movement to revolutionize sports, empower athletes, and ensure every talent gets the chance to shine!!!
 
+
+## 👥 Team AthleteVerse
+
+| ![](team/aman.JPG) | ![](team/khushishinde.jpg) | ![](team/khushiborde.jpg) | ![](team/om.jpeg) |
+|:------------------:|:--------------------------:|:--------------------------:|:-----------------:|
+| **Aman Singh**     | **Khushi Shinde**          | **Khushi Borde**           | **Om Thorat**      |
+
