@@ -16,7 +16,7 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
 |--------------|--------------|--------------|
-| ![](screenshots/1.jpeg) | ![](screenshots/2.jpeg) | ![](screenshots/3.jpeg) |
+| ![](screenshots/28.jpeg) | ![](screenshots/2.jpeg) | ![](screenshots/3.jpeg) |
 | ![](screenshots/4.jpeg) | ![](screenshots/5.jpeg) | ![](screenshots/6.jpeg) |
 | ![](screenshots/7.jpeg) | ![](screenshots/8.jpeg) | ![](screenshots/9.jpeg) |
 | ![](screenshots/10.jpeg) | ![](screenshots/11.jpeg) | ![](screenshots/12.jpeg) |
@@ -25,7 +25,7 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 | ![](screenshots/19.jpeg) | ![](screenshots/20.jpeg) | ![](screenshots/21.jpeg) |
 | ![](screenshots/22.jpeg) | ![](screenshots/23.jpeg) | ![](screenshots/24.jpeg) |
 | ![](screenshots/25.jpeg) | ![](screenshots/26.jpeg) | ![](screenshots/27.jpeg) |
-| ![](screenshots/28.jpeg) | ![](screenshots/29.jpeg) |  |
+| ![](screenshots/1.jpeg) | ![](screenshots/29.jpeg) |  |
 
 
 ## <span style="color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px;">Key Features of AthleteVerse</span>
