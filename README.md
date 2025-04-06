@@ -80,4 +80,4 @@ Committed to transforming the athletic landscape, AthleteVerse bridges gaps, sup
 Team AthleteVerse from Jawaharlal Nehru Engineering College, Mahatma Gandhi University, Chh. Sambhajinagar presents its project for the Google Solution Challenge '25, organized by Google Developer Group (GDG).
 
 
-AthleteVerse isn’t just an app—it’s a movement to revolutionize sports, empower athletes, and ensure every talent gets the chance to shine!
+AthleteVerse isn’t just an app—It’s a movement to revolutionize sports, empower athletes, and ensure every talent gets the chance to shine!
