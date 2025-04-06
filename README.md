@@ -44,6 +44,11 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 - Live Training & Expert Webinars
 </div>
 
+
+
+
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 15px 0;">
 
 Team AthleteVerse from Jawaharlal Nehru Engineering College, Mahatma Gandhi University, Chh. Sambhajinagar presents its project for the Google Solution Challenge '25, organized by Google Developer Group (GDG).
+
+

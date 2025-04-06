@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp/providers/user_provider.dart'; // Adjust import path
-import 'package:myapp/models/app_user.dart'; // Adjust import path
+import 'package:myapp/providers/user_provider.dart';
+import 'package:myapp/models/app_user.dart'; 
 
 class AthleteRegisterPage extends StatefulWidget {
   const AthleteRegisterPage({super.key});
