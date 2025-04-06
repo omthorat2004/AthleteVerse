@@ -158,7 +158,7 @@ class _AthleteExerciseInsightsPageState
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Add to training plan functionality
+                  
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[800],

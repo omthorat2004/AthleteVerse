@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'features.dart';
-
+import 'profileathlete.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final List<Widget> _pages = [
     HomeContent(),
     FeaturesScreen(),
-    ProfileContent(),
+    AthleteProfilePage()
   ];
 
   @override

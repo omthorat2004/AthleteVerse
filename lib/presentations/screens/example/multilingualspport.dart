@@ -1,169 +1,391 @@
 import 'package:flutter/material.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 
-class MultilingualDopingBlog extends StatefulWidget {
-  const MultilingualDopingBlog({super.key});
+class CalorieTrackerScreen extends StatefulWidget {
+  const CalorieTrackerScreen({super.key});
 
   @override
-  State<MultilingualDopingBlog> createState() => _MultilingualDopingBlogState();
+  State<CalorieTrackerScreen> createState() => _CalorieTrackerScreenState();
 }
 
-class _MultilingualDopingBlogState extends State<MultilingualDopingBlog> {
-  static const String _apiKey = 'AIzaSyBYNdVzAC6412yfRCH-Huxr5Vuqjm6UV90';
-  late GenerativeModel _model;
+class _CalorieTrackerScreenState extends State<CalorieTrackerScreen> {
+  final TextEditingController _ingredientController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final List<Map<String, dynamic>> _ingredients = [];
+  double _totalCalories = 0.0;
+  bool _isSubmitted = false;
+  final double _dailyGoal = 2000.0; // Default daily calorie goal
 
-  final Map<String, String> _englishContent = {
-    'title': 'Doping in Indian Sports',
-    'content': '''
-Doping is a serious problem in Indian sports. Many athletes use banned substances to improve performance.
-
-Common doping substances:
-- Anabolic steroids
-- Stimulants
-- Diuretics
-
-Health risks include:
-• Heart problems
-• Liver damage
-• Mental health issues
-
-We must promote clean sports in India.
-'''
+  final Map<String, double> _ingredientCalories = {
+    'apple': 0.52,
+    'banana': 0.89,
+    'chicken': 1.65,
+    'rice': 1.3,
+    'bread': 2.65,
+    'egg': 1.43,
+    'milk': 0.42,
+    'potato': 0.77,
   };
 
-  Map<String, String> _currentContent = {};
-  bool _isLoading = false;
-  String _selectedLanguage = 'English';
+  void _addIngredient() {
+    if (_ingredientController.text.isNotEmpty &&
+        _quantityController.text.isNotEmpty) {
+      String ingredient = _ingredientController.text.toLowerCase();
+      double quantity = double.parse(_quantityController.text);
 
-  final List<String> _supportedLanguages = [
-    'English',
-    'Hindi',
-    'Tamil',
-    'Telugu',
-    'Bengali'
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _currentContent = Map.from(_englishContent);
-    _model = GenerativeModel(
-      model: 'gemini-1.5-flash',
-      apiKey: _apiKey,
-      generationConfig: GenerationConfig(
-        temperature: 0.3,
-      ),
-    );
+      if (_ingredientCalories.containsKey(ingredient)) {
+        double calories = _ingredientCalories[ingredient]! * quantity;
+        setState(() {
+          _ingredients.add({
+            'name': ingredient,
+            'quantity': quantity,
+            'calories': calories,
+          });
+          _totalCalories += calories;
+          _ingredientController.clear();
+          _quantityController.clear();
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Ingredient not found in database!'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
-  Future<void> _handleLanguageChange(String language) async {
-    if (language == 'English') {
-      setState(() {
-        _currentContent = Map.from(_englishContent);
-        _selectedLanguage = language;
-      });
-      return;
-    }
-
+  void _removeIngredient(int index) {
     setState(() {
-      _isLoading = true;
+      _totalCalories -= _ingredients[index]['calories'];
+      _ingredients.removeAt(index);
+    });
+  }
+
+  void _submitCalories() {
+    setState(() {
+      _isSubmitted = true;
     });
 
-    try {
-      final content = await _translateContent(language, _englishContent['content']!);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Submitted ${_totalCalories.toStringAsFixed(2)} kcal for today!',
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    // Reset all values
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        _currentContent = {
-          'title': 'Loading...', 
-          'content': content,
-        };
-        _selectedLanguage = language;
-        _isLoading = false;
+        _ingredients.clear();
+        _totalCalories = 0.0;
+        _isSubmitted = false;
       });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
+    });
+  }
+
+  // AI-Based Recommendations
+  String _getRecommendation() {
+    if (_totalCalories > _dailyGoal) {
+      return 'You\'ve exceeded your daily calorie goal. Consider lighter options like salads or grilled chicken.';
+    } else if (_totalCalories == _dailyGoal) {
+      return 'Great job! You\'ve met your daily calorie goal.';
+    } else {
+      return 'You\'re on track! Add a healthy snack like a banana or yogurt to meet your goal.';
     }
   }
 
-  Future<String> _translateContent(String language, String text) async {
-    try {
-      final prompt = '''
-Translate the following sports medicine content to $language.
-Maintain the exact same formatting with bullet points and structure.
-Do not add any additional commentary or notes.
-
-Text to translate:
-$text
-''';
-
-      final response = await _model.generateContent([Content.text(prompt)]);
-      return response.text ?? 'Translation failed';
-    } catch (e) {
-      throw Exception('API Error: ${e.toString()}');
+  // Nutritional Insights
+  Map<String, double> _getMacronutrients() {
+    double carbs = 0.0, proteins = 0.0, fats = 0.0;
+    for (var ingredient in _ingredients) {
+      switch (ingredient['name']) {
+        case 'apple':
+        case 'banana':
+        case 'potato':
+          carbs += ingredient['calories'] * 0.8; // 80% carbs
+          break;
+        case 'chicken':
+        case 'egg':
+          proteins += ingredient['calories'] * 0.7; // 70% proteins
+          break;
+        case 'bread':
+        case 'milk':
+          fats += ingredient['calories'] * 0.5; // 50% fats
+          break;
+      }
     }
+    return {'carbs': carbs, 'proteins': proteins, 'fats': fats};
   }
 
   @override
   Widget build(BuildContext context) {
+    final macronutrients = _getMacronutrients();
+    final recommendation = _getRecommendation();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_currentContent['title'] ?? 'Doping Blog'),
+        title: const Text('Calorie Tracker'),
+        backgroundColor: Colors.blueAccent,
+        elevation: 0,
         centerTitle: true,
-        actions: [
-          _buildLanguageDropdown(),
-        ],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Add Ingredient',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _ingredientController,
+                      decoration: InputDecoration(
+                        labelText: 'Ingredient Name',
+                        hintText: 'e.g., Apple, Chicken Breast',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        enabled: !_isSubmitted,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _quantityController,
+                      decoration: InputDecoration(
+                        labelText: 'Quantity (grams)',
+                        hintText: 'e.g., 100, 200',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        enabled: !_isSubmitted,
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _isSubmitted ? null : _addIngredient,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 32,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Add Ingredient',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Expanded(
+              child: ListView(
                 children: [
-                  Text(
-                    _currentContent['title'] ?? '',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue[800],
+                  if (_ingredients.isNotEmpty)
+                    Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Nutritional Insights',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Carbs: ${macronutrients['carbs']?.toStringAsFixed(2)} kcal',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              'Proteins: ${macronutrients['proteins']?.toStringAsFixed(2)} kcal',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              'Fats: ${macronutrients['fats']?.toStringAsFixed(2)} kcal',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
                         ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    _currentContent['content'] ?? '',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          height: 1.6,
-                          fontSize: 16,
+                      ),
+                    ),
+                  const SizedBox(height: 16),
+                  if (_ingredients.isNotEmpty)
+                    Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'AI Recommendations',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              recommendation,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
                         ),
-                  ),
+                      ),
+                    ),
+                  const SizedBox(height: 16),
+                  ..._ingredients.map((ingredient) {
+                    return Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: ListTile(
+                        title: Text(
+                          ingredient['name'],
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '${ingredient['quantity']}g - ${ingredient['calories'].toStringAsFixed(2)} kcal',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed:
+                              _isSubmitted
+                                  ? null
+                                  : () => _removeIngredient(
+                                    _ingredients.indexOf(ingredient),
+                                  ),
+                        ),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
-    );
-  }
-
-  Widget _buildLanguageDropdown() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 12),
-      child: DropdownButton<String>(
-        value: _selectedLanguage,
-        icon: _isLoading
-            ? const SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : const Icon(Icons.translate),
-        items: _supportedLanguages.map((String language) {
-          return DropdownMenuItem<String>(
-            value: language,
-            child: Text(language),
-          );
-        }).toList(),
-        onChanged: _isLoading ? null : (value) => _handleLanguageChange(value!),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Total Calories Today',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      '${_totalCalories.toStringAsFixed(2)} kcal / $_dailyGoal kcal',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    LinearProgressIndicator(
+                      value: _totalCalories / _dailyGoal,
+                      backgroundColor: Colors.grey[300],
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Colors.blueAccent,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            if (_ingredients.isNotEmpty && !_isSubmitted)
+              ElevatedButton(
+                onPressed: _submitCalories,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 32,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Submit Today\'s Calories',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            if (_isSubmitted)
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Today\'s calories are recorded. You can\'t add now.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

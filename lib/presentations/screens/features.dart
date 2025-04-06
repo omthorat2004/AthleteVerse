@@ -74,23 +74,31 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                 ),
                 _buildFeatureButton(
                   context,
-                  label: 'Finance Section', 
-                  icon: Icons.account_balance_wallet, 
-                  color: Colors.teal.shade700, 
+                  label: 'Finance Section',
+                  icon: Icons.account_balance_wallet,
+                  color: Colors.teal.shade700,
                   onTap: () {
                     Navigator.pushNamed(context, '/finance');
                   },
                 ),
-               _buildFeatureButton(
-  context,
-  label: 'Career Planning',
-  icon: Icons.work,
-  color: Colors.blue.shade700,
-  onTap: () {
-    Navigator.pushNamed(context, '/careerplanning');
-  },
-),
-
+                _buildFeatureButton(
+                  context,
+                  label: 'Career Planning',
+                  icon: Icons.work,
+                  color: Colors.blue.shade700,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/careerplanning');
+                  },
+                ),
+                _buildFeatureButton(
+                  context,
+                  label: 'Women\'s Health',
+                  icon: Icons.female,
+                  color: Colors.pink.shade600,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/womens-health');
+                  },
+                ),
               ],
             ),
           ),

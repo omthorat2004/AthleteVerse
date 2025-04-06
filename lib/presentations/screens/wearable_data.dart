@@ -22,11 +22,11 @@ class WearableDataPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Today's Summary Card
+          
             _buildSummaryCard(),
             const SizedBox(height: 20),
-            
-            // Health Metrics Section
+
+       
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Align(
@@ -42,8 +42,7 @@ class WearableDataPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            
-            // Metrics Grid
+
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -86,10 +85,9 @@ class WearableDataPage extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 20),
-            
-            
+
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Align(
@@ -105,7 +103,7 @@ class WearableDataPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            
+
             _buildDetailCard(
               icon: Icons.monitor_heart,
               title: 'Heart Rate History',
@@ -117,7 +115,7 @@ class WearableDataPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 16),
-            
+
             _buildDetailCard(
               icon: Icons.nightlight_round,
               title: 'Sleep Analysis',
@@ -129,7 +127,7 @@ class WearableDataPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 16),
-            
+
             _buildDetailCard(
               icon: Icons.directions_run,
               title: 'Activity Breakdown',
@@ -150,9 +148,7 @@ class WearableDataPage extends StatelessWidget {
     return Card(
       color: Colors.blue[50],
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -182,13 +178,10 @@ class WearableDataPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-             Text(
-      'Last synced: ${DateFormat('h:mm a').format(DateTime.now())}',
-      style: TextStyle(
-        color: Colors.blue,
-        fontSize: 12,
-      ),
-    ),
+            Text(
+              'Last synced: ${DateFormat('h:mm a').format(DateTime.now())}',
+              style: TextStyle(color: Colors.blue, fontSize: 12),
+            ),
           ],
         ),
       ),
@@ -208,13 +201,7 @@ class WearableDataPage extends StatelessWidget {
             color: Colors.blue,
           ),
         ),
-        Text(
-          unit,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.blue,
-          ),
-        ),
+        Text(unit, style: const TextStyle(fontSize: 12, color: Colors.blue)),
       ],
     );
   }
@@ -257,18 +244,12 @@ class WearableDataPage extends StatelessWidget {
             ),
             Text(
               unit,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.blue.shade400,
-              ),
+              style: TextStyle(fontSize: 12, color: Colors.blue.shade400),
             ),
             const SizedBox(height: 4),
             Text(
               label,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.blue.shade800,
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.blue.shade800),
             ),
           ],
         ),
@@ -308,27 +289,27 @@ class WearableDataPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            ...data.entries.map((entry) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    entry.key,
-                    style: TextStyle(
-                      color: Colors.blue.shade800,
+            ...data.entries.map(
+              (entry) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      entry.key,
+                      style: TextStyle(color: Colors.blue.shade800),
                     ),
-                  ),
-                  Text(
-                    entry.value,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                    Text(
+                      entry.value,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )),
+            ),
           ],
         ),
       ),

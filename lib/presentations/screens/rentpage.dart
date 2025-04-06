@@ -40,13 +40,30 @@ class _SportsKitPageState extends State<SportsKitPage> {
   double minPrice = 0;
   double maxPrice = 1000;
 
-  final List<String> availableGames = ['All', 'Cricket', 'Football', 'Basketball', 'Badminton', 'Tennis', 'Hockey'];
-  final List<String> availableLocations = ['All', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai'];
+  final List<String> availableGames = [
+    'All',
+    'Cricket',
+    'Football',
+    'Basketball',
+    'Badminton',
+    'Tennis',
+    'Hockey',
+  ];
+  final List<String> availableLocations = [
+    'All',
+    'Mumbai',
+    'Delhi',
+    'Bangalore',
+    'Hyderabad',
+    'Pune',
+    'Chennai',
+  ];
 
   final List<SportKit> sportKits = [
     SportKit(
       name: 'Cricket Bat (MRF)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr4ZGjh76MIuVXoz5gZ0lEPQmS71AvwyE2pg&s',
       location: 'Mumbai',
       price: 100,
       rating: 4.5,
@@ -57,7 +74,8 @@ class _SportsKitPageState extends State<SportsKitPage> {
     ),
     SportKit(
       name: 'Football Shoes (Nike)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFg3KKb7QPsze5O4z-w1YeadSvLSR3tom2yQ&s',
       location: 'Delhi',
       price: 150,
       rating: 4.8,
@@ -68,7 +86,8 @@ class _SportsKitPageState extends State<SportsKitPage> {
     ),
     SportKit(
       name: 'Basketball (Spalding)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://m.media-amazon.com/images/I/61n14-+AqoL._AC_UF1000,1000_QL80_.jpg',
       location: 'Bangalore',
       price: 50,
       rating: 4.3,
@@ -79,7 +98,8 @@ class _SportsKitPageState extends State<SportsKitPage> {
     ),
     SportKit(
       name: 'Badminton Racket (Yonex)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://m.media-amazon.com/images/I/71YHhOZJN5L._AC_UF1000,1000_QL80_.jpg',
       location: 'Hyderabad',
       price: 70,
       rating: 4.6,
@@ -90,7 +110,8 @@ class _SportsKitPageState extends State<SportsKitPage> {
     ),
     SportKit(
       name: 'Tennis Racket (Wilson)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://m.media-amazon.com/images/I/71z6HrQY3BL._AC_UF1000,1000_QL80_.jpg',
       location: 'Pune',
       price: 120,
       rating: 4.7,
@@ -101,7 +122,8 @@ class _SportsKitPageState extends State<SportsKitPage> {
     ),
     SportKit(
       name: 'Hockey Stick (Adidas)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
+      imageUrl:
+          'https://m.media-amazon.com/images/I/61XZQXFQ8RL._AC_UF1000,1000_QL80_.jpg',
       location: 'Chennai',
       price: 90,
       rating: 4.5,
@@ -110,110 +132,59 @@ class _SportsKitPageState extends State<SportsKitPage> {
       condition: 'Good',
       game: 'Hockey',
     ),
-        SportKit(
-      name: 'Cricket Ball (Kookaburra)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Mumbai',
-      price: 30,
-      rating: 4.6,
-      isAvailable: true,
-      owner: 'Sachin Tendulkar',
-      condition: 'Excellent',
-      game: 'Cricket',
-    ),
-    SportKit(
-      name: 'Football (Adidas)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Delhi',
-      price: 45,
-      rating: 4.7,
-      isAvailable: true,
-      owner: 'Lionel Messi Fan',
-      condition: 'Good',
-      game: 'Football',
-    ),
-    SportKit(
-      name: 'Basketball Hoop (Lifetime)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Bangalore',
-      price: 250,
-      rating: 4.4,
-      isAvailable: false,
-      owner: 'LeBron James Fan',
-      condition: 'Excellent',
-      game: 'Basketball',
-    ),
-    SportKit(
-      name: 'Badminton Shuttlecocks (Mavis)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Hyderabad',
-      price: 15,
-      rating: 4.5,
-      isAvailable: true,
-      owner: 'Carolina Marin Fan',
-      condition: 'Good',
-      game: 'Badminton',
-    ),
-    SportKit(
-      name: 'Tennis Balls (Dunlop)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Pune',
-      price: 20,
-      rating: 4.8,
-      isAvailable: true,
-      owner: 'Rafael Nadal Fan',
-      condition: 'Excellent',
-      game: 'Tennis',
-    ),
-    SportKit(
-      name: 'Hockey Ball (Kookaburra)',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJGOqINzTa3GeJaCc7Bvr0-KebEIPlmgIlA&s',
-      location: 'Chennai',
-      price: 10,
-      rating: 4.6,
-      isAvailable: true,
-      owner: 'Harmanpreet Singh Fan',
-      condition: 'Good',
-      game: 'Hockey',
-    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    List<SportKit> filteredKits = sportKits.where((kit) {
-      return (searchQuery.isEmpty || kit.name.toLowerCase().contains(searchQuery.toLowerCase())) &&
-          (selectedCondition == 'All' || kit.condition == selectedCondition) &&
-          (selectedGame == 'All' || kit.game == selectedGame) &&
-          (selectedLocation == 'All' || kit.location == selectedLocation) &&
-          (kit.price >= minPrice && kit.price <= maxPrice) &&
-          (!showOnlyAvailable || kit.isAvailable);
-    }).toList();
+    List<SportKit> filteredKits =
+        sportKits.where((kit) {
+          return (searchQuery.isEmpty ||
+                  kit.name.toLowerCase().contains(searchQuery.toLowerCase())) &&
+              (selectedCondition == 'All' ||
+                  kit.condition == selectedCondition) &&
+              (selectedGame == 'All' || kit.game == selectedGame) &&
+              (selectedLocation == 'All' || kit.location == selectedLocation) &&
+              (kit.price >= minPrice && kit.price <= maxPrice) &&
+              (!showOnlyAvailable || kit.isAvailable);
+        }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gear Marketplace', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-        backgroundColor: Colors.blueAccent,
+        title: Text(
+          'Gear Marketplace',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue[800],
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
       ),
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
                 TextField(
                   decoration: InputDecoration(
-                    hintText: 'Search Equipment...',
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(10)
+                    hintText: 'Search sports equipment...',
+                    prefixIcon: Icon(Icons.search, color: Colors.blue[800]),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -221,102 +192,155 @@ class _SportsKitPageState extends State<SportsKitPage> {
                     });
                   },
                 ),
-                SizedBox(height: 10),
-                Wrap(
-                  spacing: 8.0,
-                  children: [
-                    FilterDropdown(
-                      value: selectedGame,
-                      items: availableGames,
-                      label: 'Game',
-                      onChanged: (value) => setState(() => selectedGame = value),
-                    ),
-                    FilterDropdown(
-                      value: selectedLocation,
-                      items: availableLocations,
-                      label: 'Location',
-                      onChanged: (value) => setState(() => selectedLocation = value),
-                    ),
-                    FilterDropdown(
-                      value: selectedCondition,
-                      items: ['All', 'Excellent', 'Good'],
-                      label: 'Condition',
-                      onChanged: (value) => setState(() => selectedCondition = value),
-                    ),
-                  ],
+                SizedBox(height: 12),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      FilterChip(
+                        label: Text('Available Only'),
+                        selected: showOnlyAvailable,
+                        onSelected: (bool value) {
+                          setState(() {
+                            showOnlyAvailable = value;
+                          });
+                        },
+                        selectedColor: Colors.blue[100],
+                        checkmarkColor: Colors.blue[800],
+                        backgroundColor: Colors.grey[200],
+                        labelStyle: TextStyle(
+                          color:
+                              showOnlyAvailable
+                                  ? Colors.blue[800]
+                                  : Colors.grey[700],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      FilterDropdown(
+                        value: selectedGame,
+                        items: availableGames,
+                        label: 'Game',
+                        onChanged:
+                            (value) => setState(() => selectedGame = value!),
+                      ),
+                      SizedBox(width: 8),
+                      FilterDropdown(
+                        value: selectedLocation,
+                        items: availableLocations,
+                        label: 'Location',
+                        onChanged:
+                            (value) =>
+                                setState(() => selectedLocation = value!),
+                      ),
+                      SizedBox(width: 8),
+                      FilterDropdown(
+                        value: selectedCondition,
+                        items: ['All', 'Excellent', 'Good'],
+                        label: 'Condition',
+                        onChanged:
+                            (value) =>
+                                setState(() => selectedCondition = value!),
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(height: 12),
+
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Price Range',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
                         children: [
-                            Text('Min Price: ${minPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.black87),),
-                            Slider(
-                              value: minPrice,
-                              min: 0,
-                              max: maxPrice,
-                              divisions: 1000,
-                              label: minPrice.round().toString(),
-                              activeColor: Colors.blueAccent,
-                              onChanged: (value) => setState(() => minPrice = value),
-                            ),
+                          Text(
+                            '₹${minPrice.toInt()}',
+                            style: TextStyle(color: Colors.blue[800]),
+                          ),
+                          Spacer(),
+                          Text(
+                            '₹${maxPrice.toInt()}',
+                            style: TextStyle(color: Colors.blue[800]),
+                          ),
                         ],
                       ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                            Text('Max Price: ${maxPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.black87),),
-                            Slider(
-                              value: maxPrice,
-                              min: minPrice,
-                              max: 1000,
-                              divisions: 1000,
-                              label: maxPrice.round().toString(),
-                              activeColor: Colors.blueAccent,
-                              onChanged: (value) => setState(() => maxPrice = value),
-                            ),
-                        ],
-                       ),
-                    ),
-                    
-                  ],
-                ),
-                 SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Checkbox(
-                      value: showOnlyAvailable,
-                      onChanged: (value) => setState(() => showOnlyAvailable = value!),
-                      activeColor: Colors.blueAccent,
-                    ),
-                    Text('Show Only Available',style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold),),
-                  ],
+                      RangeSlider(
+                        values: RangeValues(minPrice, maxPrice),
+                        min: 0,
+                        max: 1000,
+                        divisions: 20,
+                        labels: RangeLabels(
+                          '₹${minPrice.toInt()}',
+                          '₹${maxPrice.toInt()}',
+                        ),
+                        activeColor: Colors.blue[800],
+                        inactiveColor: Colors.grey[300],
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            minPrice = values.start;
+                            maxPrice = values.end;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: filteredKits.isEmpty
-                ? Center(child: Text('No kits available'))
-                : GridView.builder(
-                    padding: const EdgeInsets.all(10),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.75
+            child:
+                filteredKits.isEmpty
+                    ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search_off,
+                            size: 60,
+                            color: Colors.grey[400],
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'No items found',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          Text(
+                            'Try adjusting your filters',
+                            style: TextStyle(color: Colors.grey[500]),
+                          ),
+                        ],
+                      ),
+                    )
+                    : GridView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                        childAspectRatio: 0.7,
+                      ),
+                      itemCount: filteredKits.length,
+                      itemBuilder: (context, index) {
+                        return SportKitCard(sportKit: filteredKits[index]);
+                      },
                     ),
-                    itemCount: filteredKits.length,
-                    itemBuilder: (context, index) {
-                      return SportKitCard(sportKit: filteredKits[index]);
-                    },
-                  ),
           ),
         ],
       ),
@@ -331,139 +355,221 @@ class SportKitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        elevation: 4,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade50, Colors.white],
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                SizedBox(
+                  height: 120,
+                  width: double.infinity,
                   child: Image.network(
                     sportKit.imageUrl,
-                    height: 100,
-                    width: double.infinity,
                     fit: BoxFit.cover,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          height: 100,
-                          width: double.infinity,
-                          child: Icon(Icons.error),
-                        );
-                      },
+                    errorBuilder:
+                        (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: Center(
+                            child: Icon(
+                              Icons.sports,
+                              size: 40,
+                              color: Colors.blue[800],
+                            ),
+                          ),
+                        ),
                   ),
                 ),
+                // Availability ribbon
                 Positioned(
-                  top: 10,
-                  right: 10,
+                  top: 0,
+                  right: 0,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      sportKit.game,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                      color:
+                          sportKit.isAvailable
+                              ? Colors.blue[800]
+                              : Colors.grey[600],
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(12),
                       ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          sportKit.isAvailable
+                              ? Icons.check_circle
+                              : Icons.cancel,
+                          size: 14,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          sportKit.isAvailable ? 'AVAILABLE' : 'UNAVAILABLE',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
+
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    sportKit.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black87,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.location_on, color: Colors.black54, size: 16),
-                      SizedBox(width: 4),
-                      Text(
-                        sportKit.location,
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          sportKit.game.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          sportKit.name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue[900],
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 4),
+
+                  SizedBox(height: 10),
+
                   Row(
                     children: [
-                      Icon(Icons.currency_rupee_sharp, color: Colors.black54, size: 16),
-                      SizedBox(width: 4),
+                      Icon(
+                        Icons.currency_rupee,
+                        size: 18,
+                        color: Colors.blue[800],
+                      ),
                       Text(
-                        sportKit.price.toString(),
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        '${sportKit.price.toStringAsFixed(0)}/day',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue[800],
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.blue[100],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.star, size: 16, color: Colors.amber),
+                            SizedBox(width: 4),
+                            Text(
+                              sportKit.rating.toStringAsFixed(1),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Owner: ${sportKit.owner}',
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Condition: ${sportKit.condition}',
-                    style: TextStyle(fontSize: 14, color: Colors.green),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 6),
-                  Row(
+
+                  SizedBox(height: 12),
+
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 8,
                     children: [
-                      Icon(Icons.star, color: Colors.orange, size: 18),
-                      Text(
-                        ' ${sportKit.rating}',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      _buildDetailItem(
+                        icon: Icons.location_on_outlined,
+                        text: sportKit.location,
+                      ),
+                      _buildDetailItem(
+                        icon: Icons.person_outline,
+                        text: sportKit.owner,
+                      ),
+                      _buildDetailItem(
+                        icon:
+                            sportKit.condition == 'Excellent'
+                                ? Icons.verified
+                                : Icons.thumb_up,
+                        text: sportKit.condition,
+                        color:
+                            sportKit.condition == 'Excellent'
+                                ? Colors.green
+                                : Colors.blue,
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(8),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: sportKit.isAvailable ? () {} : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue[800],
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 12),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                ),
-                child: Text(
-                  'Rent Now',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  icon: Icon(Icons.shopping_basket_outlined),
+                  label: Text(
+                    'RENT NOW',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -472,13 +578,28 @@ class SportKitCard extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildDetailItem({
+    required IconData icon,
+    required String text,
+    Color? color,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: color ?? Colors.blue[800]),
+        SizedBox(width: 4),
+        Text(text, style: TextStyle(fontSize: 12, color: Colors.blue[900])),
+      ],
+    );
+  }
 }
 
 class FilterDropdown extends StatelessWidget {
   final String value;
   final List<String> items;
   final String label;
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String?> onChanged;
 
   const FilterDropdown({
     super.key,
@@ -490,20 +611,30 @@ class FilterDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: value,
-      items: items
-          .map((item) => DropdownMenuItem(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: DropdownButton<String>(
+        value: value,
+        items:
+            items.map((item) {
+              return DropdownMenuItem<String>(
                 value: item,
-                child: Text(item,style: TextStyle(color: Colors.black87)),
-              ))
-          .toList(),
-      onChanged: (newValue) => onChanged(newValue!),
-      hint: Text(label),
-      underline: Container(
-          height: 1.0,
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey, width: 1.0)))),
+                child: Text(item, style: TextStyle(fontSize: 14)),
+              );
+            }).toList(),
+        onChanged: onChanged,
+        underline: Container(),
+        icon: Icon(Icons.arrow_drop_down, color: Colors.blue[800]),
+        hint: Text(label),
+        borderRadius: BorderRadius.circular(12),
+        dropdownColor: Colors.white,
+        style: TextStyle(color: Colors.black87),
+      ),
     );
   }
 }

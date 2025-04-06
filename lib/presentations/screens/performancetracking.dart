@@ -37,16 +37,16 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                     label: 'Checklist',
                     icon: Icons.checklist,
                     onTap: () {
-                      // Navigate to Checklist screen
+               
                       Navigator.pushNamed(context, '/checklist');
                     },
                   ),
                   _buildFeatureButton(
                     context,
-                    label: 'Graph',
+                    label: 'Progress Graph',
                     icon: Icons.analytics,
                     onTap: () {
-                      // Navigate to Graph screen
+                     
                       Navigator.pushNamed(context, '/graph');
                     },
                   ),
@@ -55,7 +55,7 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                     label: 'Calorie Calculator',
                     icon: Icons.calculate,
                     onTap: () {
-                      // Navigate to Calorie Calculator screen
+                    
                       Navigator.pushNamed(context, '/calorie');
                     },
                   ),

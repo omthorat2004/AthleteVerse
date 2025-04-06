@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class CalorieTrackerScreen extends StatefulWidget {
   const CalorieTrackerScreen({super.key});
@@ -8,364 +10,272 @@ class CalorieTrackerScreen extends StatefulWidget {
 }
 
 class _CalorieTrackerScreenState extends State<CalorieTrackerScreen> {
-  final TextEditingController _ingredientController = TextEditingController();
+  static const String _apiKey = 'AIzaSyBYNdVzAC6412yfRCH-Huxr5Vuqjm6UV90';
+  late GenerativeModel _model;
+
+  final TextEditingController _foodController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-  final List<Map<String, dynamic>> _ingredients = [];
+  final List<Map<String, dynamic>> _foodItems = [];
   double _totalCalories = 0.0;
   bool _isSubmitted = false;
-  final double _dailyGoal = 2000.0; // Default daily calorie goal
+  final double _dailyGoal = 2000.0;
+  bool _isLoading = false;
 
-  final Map<String, double> _ingredientCalories = {
-    'apple': 0.52,
-    'banana': 0.89,
-    'chicken': 1.65,
-    'rice': 1.3,
-    'bread': 2.65,
-    'egg': 1.43,
-    'milk': 0.42,
-    'potato': 0.77,
-  };
+  @override
+  void initState() {
+    super.initState();
+    _model = GenerativeModel(
+      model: 'gemini-1.5-flash',
+      apiKey: _apiKey,
+      generationConfig: GenerationConfig(temperature: 0.4, topK: 20),
+    );
+  }
 
-  void _addIngredient() {
-    if (_ingredientController.text.isNotEmpty && _quantityController.text.isNotEmpty) {
-      String ingredient = _ingredientController.text.toLowerCase();
-      double quantity = double.parse(_quantityController.text);
+  Future<void> _addFoodItem() async {
+    if (_foodController.text.isEmpty || _quantityController.text.isEmpty) return;
 
-      if (_ingredientCalories.containsKey(ingredient)) {
-        double calories = _ingredientCalories[ingredient]! * quantity;
-        setState(() {
-          _ingredients.add({
-            'name': ingredient,
-            'quantity': quantity,
-            'calories': calories,
-          });
-          _totalCalories += calories;
-          _ingredientController.clear();
-          _quantityController.clear();
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ingredient not found in database!'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final food = _foodController.text.toLowerCase();
+      final quantity = double.parse(_quantityController.text);
+
+      final prompt = '''
+For $quantity grams of $food, provide nutrition data in this exact JSON format:
+{
+  "name": "$food",
+  "quantity": $quantity,
+  "calories_per_100g": X,
+  "total_calories": Y,
+  "carbs_g": Z,
+  "protein_g": W,
+  "fat_g": V
+}
+
+Where X,Y,Z,W,V are numbers. Return ONLY the JSON object.''';
+
+      final response = await _model.generateContent([Content.text(prompt)]);
+      final jsonString = response.text
+              ?.replaceAll('```json', '')
+              .replaceAll('```', '')
+              .trim() ??
+          '';
+      final foodData = json.decode(jsonString) as Map<String, dynamic>;
+
+      setState(() {
+        _foodItems.add(foodData);
+        _totalCalories += (foodData['total_calories'] as num).toDouble();
+        _foodController.clear();
+        _quantityController.clear();
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
-  void _removeIngredient(int index) {
+  void _removeFoodItem(int index) {
     setState(() {
-      _totalCalories -= _ingredients[index]['calories'];
-      _ingredients.removeAt(index);
+      _totalCalories -= _foodItems[index]['total_calories'];
+      _foodItems.removeAt(index);
     });
   }
 
   void _submitCalories() {
-    setState(() {
-      _isSubmitted = true;
-    });
-
+    setState(() => _isSubmitted = true);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Submitted ${_totalCalories.toStringAsFixed(2)} kcal for today!'),
+      const SnackBar(
+        content: Text('Daily log submitted'),
         backgroundColor: Colors.green,
       ),
     );
-
-    // Reset all values
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        _ingredients.clear();
-        _totalCalories = 0.0;
+        _foodItems.clear();
+        _totalCalories = 0;
         _isSubmitted = false;
       });
     });
   }
 
-  // AI-Based Recommendations
-  String _getRecommendation() {
-    if (_totalCalories > _dailyGoal) {
-      return 'You\'ve exceeded your daily calorie goal. Consider lighter options like salads or grilled chicken.';
-    } else if (_totalCalories == _dailyGoal) {
-      return 'Great job! You\'ve met your daily calorie goal.';
-    } else {
-      return 'You\'re on track! Add a healthy snack like a banana or yogurt to meet your goal.';
-    }
-  }
-
-  // Nutritional Insights
-  Map<String, double> _getMacronutrients() {
-    double carbs = 0.0, proteins = 0.0, fats = 0.0;
-    for (var ingredient in _ingredients) {
-      switch (ingredient['name']) {
-        case 'apple':
-        case 'banana':
-        case 'potato':
-          carbs += ingredient['calories'] * 0.8; // 80% carbs
-          break;
-        case 'chicken':
-        case 'egg':
-          proteins += ingredient['calories'] * 0.7; // 70% proteins
-          break;
-        case 'bread':
-        case 'milk':
-          fats += ingredient['calories'] * 0.5; // 50% fats
-          break;
-      }
-    }
-    return {'carbs': carbs, 'proteins': proteins, 'fats': fats};
-  }
-
   @override
   Widget build(BuildContext context) {
-    final macronutrients = _getMacronutrients();
-    final recommendation = _getRecommendation();
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calorie Tracker'),
-        backgroundColor: Colors.blueAccent,
-        elevation: 0,
-        centerTitle: true,
+        title: const Text('Nutrition Tracker'),
+        actions: [
+          if (_isLoading)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      'Add Ingredient',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _ingredientController,
-                      decoration: InputDecoration(
-                        labelText: 'Ingredient Name',
-                        hintText: 'e.g., Apple, Chicken Breast',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.blueAccent),
-                        ),
-                        enabled: !_isSubmitted,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _quantityController,
-                      decoration: InputDecoration(
-                        labelText: 'Quantity (grams)',
-                        hintText: 'e.g., 100, 200',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.blueAccent),
-                        ),
-                        enabled: !_isSubmitted,
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: _isSubmitted ? null : _addIngredient,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    // Input Card
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: _foodController,
+                              decoration: const InputDecoration(
+                                labelText: 'Food Name',
+                                border: OutlineInputBorder(),
+                              ),
+                              enabled: !_isSubmitted,
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: _quantityController,
+                              decoration: const InputDecoration(
+                                labelText: 'Grams',
+                                border: OutlineInputBorder(),
+                              ),
+                              keyboardType: TextInputType.number,
+                              enabled: !_isSubmitted,
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: _isSubmitted || _isLoading
+                                  ? null
+                                  : _addFoodItem,
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 50),
+                              ),
+                              child: const Text('Add Food Item'),
+                            ),
+                          ],
                         ),
                       ),
-                      child: const Text(
-                        'Add Ingredient',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Food Items List
+                    if (_foodItems.isNotEmpty)
+                      Expanded(
+                        child: Card(
+                          child: Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Today\'s Foods',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: _foodItems.length,
+                                  itemBuilder: (context, index) {
+                                    final item = _foodItems[index];
+                                    return ListTile(
+                                      title: Text(
+                                        item['name'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        '${item['quantity']}g • ${item['total_calories']} kcal\n'
+                                        'Carbs: ${item['carbs_g']}g • Protein: ${item['protein_g']}g • Fat: ${item['fat_g']}g',
+                                      ),
+                                      trailing: IconButton(
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: _isSubmitted
+                                            ? null
+                                            : () => _removeFoodItem(index),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                    const SizedBox(height: 16),
+
+                    // Progress Card
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Daily Progress',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            LinearProgressIndicator(
+                              value: _totalCalories / _dailyGoal,
+                              backgroundColor: Colors.grey[300],
+                              color: _totalCalories > _dailyGoal
+                                  ? Colors.red
+                                  : Colors.green,
+                              minHeight: 12,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              '${_totalCalories.toStringAsFixed(2)} / $_dailyGoal kcal',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            if (_foodItems.isNotEmpty && !_isSubmitted)
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: _submitCalories,
+                                  child: const Text('Submit Daily Log'),
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            Expanded(
-              child: ListView(
-                children: [
-                  if (_ingredients.isNotEmpty)
-                    Card(
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Nutritional Insights',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              'Carbs: ${macronutrients['carbs']?.toStringAsFixed(2)} kcal',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              'Proteins: ${macronutrients['proteins']?.toStringAsFixed(2)} kcal',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              'Fats: ${macronutrients['fats']?.toStringAsFixed(2)} kcal',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  const SizedBox(height: 16),
-                  if (_ingredients.isNotEmpty)
-                    Card(
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'AI Recommendations',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              recommendation,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  const SizedBox(height: 16),
-                  ..._ingredients.map((ingredient) {
-                    return Card(
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: ListTile(
-                        title: Text(
-                          ingredient['name'],
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          '${ingredient['quantity']}g - ${ingredient['calories'].toStringAsFixed(2)} kcal',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: _isSubmitted ? null : () => _removeIngredient(_ingredients.indexOf(ingredient)),
-                        ),
-                      ),
-                    );
-                  }),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Total Calories Today',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      '${_totalCalories.toStringAsFixed(2)} kcal / $_dailyGoal kcal',
-                      style: const TextStyle(
-                        fontSize: 24,
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    LinearProgressIndicator(
-                      value: _totalCalories / _dailyGoal,
-                      backgroundColor: Colors.grey[300],
-                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.blueAccent),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            if (_ingredients.isNotEmpty && !_isSubmitted)
-              ElevatedButton(
-                onPressed: _submitCalories,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text(
-                  'Submit Today\'s Calories',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-            if (_isSubmitted)
-              const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  'Today\'s calories are recorded. You can\'t add now.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
