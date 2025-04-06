@@ -66,33 +66,37 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 | ![](screenshots/25.jpeg) | ![](screenshots/26.jpeg) | ![](screenshots/27.jpeg) |
 | Screenshot 28          | Screenshot 29          |                        |
 | ![](screenshots/28.jpeg) | ![](screenshots/29.jpeg) |                        |
-
 ## 👥 Team AthleteVerse
-From **Jawaharlal Nehru Engineering College**, Mahatma Gandhi University, Chh. Sambhajinagar
+
+Team AthleteVerse is a passionate group of innovators from **Jawaharlal Nehru Engineering College**, affiliated with **Mahatma Gandhi University, Chh. Sambhajinagar**. United by a shared vision to transform the Indian sports ecosystem, we’re dedicated to building scalable, inclusive, and tech-driven solutions that empower athletes at every level.
+
+---
+
+## 🚀 Contributors
 
 <table>
   <tr>
     <td align="center">
-      <a href="https://www.linkedin.com/in/aman-singh35/">
-        <img src="team/aman.JPG" width="120"/><br/>
+      <a href="https://www.linkedin.com/in/aman-singh35/" target="_blank">
+        <img src="team/aman.JPG" width="150"/><br/>
         <b>Aman Singh</b>
       </a>
     </td>
     <td align="center">
-      <a href="https://www.linkedin.com/in/khushi-shinde-b32287291">
-        <img src="team/khushishinde.jpg" width="120"/><br/>
+      <a href="https://www.linkedin.com/in/khushi-shinde-b32287291" target="_blank">
+        <img src="team/khushishinde.jpg" width="150"/><br/>
         <b>Khushi Shinde</b>
       </a>
     </td>
     <td align="center">
-      <a href="https://www.linkedin.com/in/khushi-borde-759258303">
-        <img src="team/khushiborde.jpg" width="120"/><br/>
+      <a href="https://www.linkedin.com/in/khushi-borde-759258303" target="_blank">
+        <img src="team/khushiborde.jpg" width="150"/><br/>
         <b>Khushi Borde</b>
       </a>
     </td>
     <td align="center">
-      <a href="https://www.linkedin.com/in/omthoratcse/">
-        <img src="team/om.jpeg" width="120"/><br/>
+      <a href="https://www.linkedin.com/in/omthoratcse/" target="_blank">
+        <img src="team/om.jpeg" width="150"/><br/>
         <b>Om Thorat</b>
       </a>
     </td>
