@@ -12,10 +12,6 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 - **Sports Organizations** – Scout talent, manage teams, collaborate with professionals, and facilitate sponsorship opportunities.
 - **Admins** – Oversee platform operations, verify users, manage anonymous reports, conduct platform testing, and handle blogs, webinars, and community engagement.
 
-## <span style="color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px;">Key Features of AthleteVerse</span>
-
-
-
 ## 🧪 Prototype Screenshots
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
@@ -30,6 +26,12 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 | ![](screenshots/22.jpeg) | ![](screenshots/23.jpeg) | ![](screenshots/24.jpeg) |
 | ![](screenshots/25.jpeg) | ![](screenshots/26.jpeg) | ![](screenshots/27.jpeg) |
 | ![](screenshots/28.jpeg) | ![](screenshots/29.jpeg) |  |
+
+
+## <span style="color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px;">Key Features of AthleteVerse</span>
+
+
+
 
 <div style="columns: 2; column-gap: 30px;">
 
