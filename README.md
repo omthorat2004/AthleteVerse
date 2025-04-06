@@ -22,9 +22,7 @@ AthleteVerse is reshaping Indian sports while driving impact across 11 UN Sustai
 4. Click Create Workspace
 
 ```bash
-# After workspace loads:
-flutter pub get
-flutter run -d web-server
+
 
 ## 🧪 Prototype Screenshots
 | Screenshot 1           | Screenshot 2           | Screenshot 3           |
